@@ -1,0 +1,85 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - marvasi_migration
+id: marvasi_file_managed
+migration_tags:
+  - marvasi
+  - file
+  - file_managed
+migration_group: marvasi_file
+label: 'File gestiti da drupal'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://sync.icmarvasivizzone.edu.it/jsonapi/file/file?page[offset]=0&page[limit]=50&sort[fid][path]=drupal_internal__fid&sort[fid][direction]=ASC'
+  item_selector: data
+  fields:
+    - name: uuid
+      label: "L'uuid del file"
+      selector: id
+    - name: fid
+      label: "Drupal internal fid"
+      selector: attributes/drupal_internal__fid
+    - name: langcode
+      label: "La lingua del file"
+      selector: attributes/langcode
+    - name: uid
+      label: "User id proprietario del file"
+      selector: relationships/uid/data/meta/drupal_internal__target_id
+    - name: filename
+      label: "Il nome del file"
+      selector: attributes/filename
+    - name: uri_value
+      label: "Percorso del file"
+      selector: attributes/uri/value
+    - name: filemime
+      label: "MIME type"
+      selector: attributes/uri/filemime
+    - name: filesize
+      label: "Dimensione del file"
+      selector: attributes/uri/filesize
+    - name: status
+      label: "Stato del file"
+      selector: attributes/uri/status
+    - name: created
+      label: "Data di creazione"
+      selector: attributes/uri/created
+    - name: changed
+      label: "Data di modifica"
+      selector: attributes/uri/changed
+  ids:
+    uuid:
+      type: string
+    fid:
+      type: integer
+
+process:
+  # fid: fid
+  uuid: uuid
+  langcode:
+    plugin: skip_on_empty
+    source: langcode
+    method: process
+    default_value: "und"
+  uid: uid
+  filename: filename
+  uri: uri_value
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: created
+  changed: changed
+
+destination:
+  plugin: entity:file
+
+migration_dependencies: { }
+

@@ -1,0 +1,13 @@
+<?php
+
+// marvasi_migration.uninstall
+/**
+ * Implements hook_uninstall().
+ */
+function marvasi_migration_uninstall() {
+  // Delete migration configurations.
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.marvasi_file_managed')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.marvasi_file')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.marvasi_node')->delete();
+}
+
