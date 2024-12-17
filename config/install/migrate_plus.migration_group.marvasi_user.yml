@@ -1,0 +1,12 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - marvasi_migration
+id: marvasi_user
+label: 'Marvasi - User'
+description: 'Gruppo di migrazioni che importa gli utenti.'
+source_type: JSON
+module: null
+shared_configuration: null

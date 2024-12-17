@@ -1,0 +1,110 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - marvasi_migration
+id: marvasi_file_single
+migration_tags:
+  - marvasi
+  - file
+  - file_managed
+migration_group: marvasi_files
+label: 'Singolo file gestito da Drupal'
+source:
+# plugin: custom_json_single_file
+#  url: 'https://sync.icmarvasivizzone.edu.it/jsonapi/file/file/18ecd242-ae0b-455f-8b95-feb807b2072f'
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://sync.icmarvasivizzone.edu.it/jsonapi/file/file/18ecd242-ae0b-455f-8b95-feb807b2072f'
+  item_selector: 0
+  fields:
+    - name: uuid
+      label: "L'uuid del file"
+      selector: id
+    - name: fid
+      label: "Drupal internal fid"
+      selector: attributes/drupal_internal__fid
+    - name: langcode
+      label: "La lingua del file"
+      selector: attributes/langcode
+    - name: uid
+      label: "User id proprietario del file"
+      selector: relationships/uid/data/meta/drupal_internal__target_id
+    - name: filename
+      label: "Il nome del file"
+      selector: attributes/filename
+    - name: uri_value
+      label: "Percorso del file"
+      selector: attributes/uri/value
+    - name: filemime
+      label: "MIME type"
+      selector: attributes/filemime
+    - name: filesize
+      label: "Dimensione del file"
+      selector: attributes/filesize
+    - name: status
+      label: "Stato del file"
+      selector: attributes/status
+    - name: created
+      label: "Data di creazione"
+      selector: attributes/created
+    - name: changed
+      label: "Data di modifica"
+      selector: attributes/changed
+  ids:
+    uuid:
+      type: string
+#    fid:
+#      type: integer
+
+process:
+  uuid:
+    - plugin: log
+    - plugin: skip_on_empty
+      source: uuid
+      method: process
+  langcode:
+    - plugin: log
+    - plugin: skip_on_empty
+      source: langcode
+      method: process
+      default_value: "und"
+  uid:
+    - plugin: log
+      source: uid
+  filename:
+    - plugin: log
+      source: filename
+  uri:
+    - plugin: log
+      source: uri_value
+  filemime:
+    - plugin: log
+      source: filemime
+  filesize:
+    - plugin: log
+      source: filesize
+#  status:
+#    - plugin: log
+#      source: status
+#  created:
+#    plugin: format_date
+#    from_format: 'Y-m-d\TH:i:sP'
+#    to_format: 'U'
+#    source: created
+#  changed:
+#    plugin: format_date
+#    from_format: 'Y-m-d\TH:i:sP'
+#    to_format: 'U'
+#    source: changed
+
+destination:
+  plugin: entity:file
+
+migration_dependencies: { }

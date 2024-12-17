@@ -4,8 +4,8 @@ dependencies:
   enforced:
     module:
       - marvasi_migration
-id: marvasi_file
-label: 'Marvasi - File'
+id: marvasi_files
+label: 'Marvasi - Files'
 description: 'Gruppo di migrazioni che importa i file.'
 source_type: JSON
 module: null
