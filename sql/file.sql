@@ -39,5 +39,13 @@ WHERE
   AND file.fid NOT IN (9429,9563,2569,2570,2571,2575,2572,2573,2574,2576,9428) -- allegati e image /node/458
   -- - Il ct book non viene migrato (guide obsolete)
   AND file.uri NOT LIKE 'public://book%'
+  AND file.uri NOT LIKE 'private://book%'
+  AND file.uri NOT LIKE 'private://pagine-e-tassonomia%'
+  AND file.uri NOT LIKE 'private://articoli/acc%'
+  AND file.uri NOT LIKE 'private://articoli/apps%'
+  AND file.uri NOT LIKE 'private://articoli/google%'
+  AND file.uri NOT LIKE 'private://articoli/login%'
+  AND file.uri NOT LIKE 'private://lim_%'
+  AND file.uri NOT LIKE 'private://logo_classe_viva.png'
 ORDER BY file.uri ASC
 ;
