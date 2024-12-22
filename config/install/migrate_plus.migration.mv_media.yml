@@ -1,0 +1,117 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - marvasi_migration
+id: mv_media
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasi
+  - media
+migration_group: marvasi_files
+label: 'Importa i media da icmarvasivizzone.edu.it'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/marvasi_migration/artifact/media_image.json'
+  item_selector: 0
+  fields:
+    - name: mid
+      label: 'ID del media'
+      selector: mid
+    - name: uid
+      label: "ID dell'utente proprietario"
+      selector: uid
+    - name: bundle
+      label: 'Il tipo di media'
+      selector: bundle
+    - name: name
+      label: 'Il nome del media'
+      selector: name
+    - name: field_media_image_target_id
+      label: "Il target id a file_managed vecchio"
+      selector: field_media_image_target_id
+    - name: field_media_image_alt
+      label: "La descrizione"
+      selector: field_media_image_alt
+    - name: field_icona
+      label: "Eventuale icona"
+      selector: field_icona
+    - name: field_trascrizione
+      label: "Eventuale trascrizione"
+      selector: field_trascrizione
+    - name: langcode
+      label: "La lingua"
+      selector: langcode
+    - name: status
+      label: "Lo stato"
+      selector: status
+    - name: uri
+      label: "L'uri"
+      selector: uri
+    - name: url
+      label: "L'url pubblico"
+      selector: url
+    - name: created
+      label: "La data di creazione"
+      selector: created
+    - name: uuid
+      label: "L'uuid"
+      selector: uuid
+  ids:
+    mid:
+      type: integer
+    uuid:
+      type: string
+  constants:
+    images_media_path: 'public://media/immagini/'
+process:
+  mid: mid
+  uid: uid
+  bundle: bundle
+  name: name
+  field_media_image/target_id:
+    plugin: file_import
+    source: url
+    destination: constants/images_media_path
+    uid: uid
+    file_exists: replace
+    skip_on_missing_source: true
+    id_only: true
+  field_media_image/alt:
+    plugin: skip_on_empty
+    source: field_media_image_alt
+    method: process
+  field_icona:
+    plugin: skip_on_empty
+    source: field_icona
+    method: process
+  field_trascrizione:
+    plugin: skip_on_empty
+    source: field_trascrizione
+    method: process
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: und
+  status:
+    plugin: default_value
+    source: published
+    default_value: 0
+  created: created
+
+destination:
+  plugin: 'entity:media'
+  translations: true
+migration_dependencies:
+  required:
+    - mv_users

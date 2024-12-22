@@ -47,3 +47,24 @@
 │ ├── galleria -> `field_galleria` ==> no immagini di galleria
 │ └── immagine -> `field_image` ==> media
 
+```yaml
+  permissions:
+    -
+      plugin: static_map
+      source: permissions
+      bypass: true
+      map:
+        'use PHP for block visibility': 'use PHP for settings'
+        'administer site-wide contact form': 'administer contact forms'
+        'post comments without approval': 'skip comment approval'
+        'edit own blog entries': 'edit own blog content'
+        'edit any blog entry': 'edit any blog content'
+        'delete own blog entries': 'delete own blog content'
+        'delete any blog entry': 'delete any blog content'
+        'create forum topics': 'create forum content'
+        'delete any forum topic': 'delete any forum content'
+        'delete own forum topics': 'delete own forum content'
+        'edit any forum topic': 'edit any forum content'
+        'edit own forum topics': 'edit own forum content'
+    - plugin: flatten
+```

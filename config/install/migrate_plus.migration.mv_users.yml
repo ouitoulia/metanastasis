@@ -1,0 +1,114 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - marvasi_migration
+id: mv_users
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasi
+  - user
+migration_group: marvasi_user
+label: 'Importa gli utenti'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/marvasi_migration/artifact/users.json'
+  item_selector: 0
+  fields:
+    - name: uid
+      label: "L'id dell'utente"
+      selector: uid
+    - name: uuid
+      label: "L'uuid dell'utente"
+      selector: uuid
+    - name: langcode
+      label: "La lingua del contenuto"
+      selector: langcode
+    - name: preferred_langcode
+      label: "La lingua preferita dall'utente"
+      selector: preferred_langcode
+    - name: preferred_admin_langcode
+      label: "La lingua preferita dall'utente nelle pagine di amminsitrazione"
+      selector: preferred_admin_langcode
+    - name: name
+      label: "Il nome utente"
+      selector: name
+    - name: mail
+      label: "L'indirizzo email"
+      selector: mail
+    - name: timezone
+      label: "Il fuso orario dell'utente"
+      selector: timezone
+    - name: status
+      label: "Lo stato, se è attivo o meno"
+      selector: status
+    - name: created
+      label: "La data di creazione dell'account"
+      selector: created
+    - name: changed
+      label: "La data di ultimo aggiornamento"
+      selector: changed
+    - name: access
+      label: "L'ultima data di accesso"
+      selector: access
+    - name: login
+      label: "L'ultima data di login"
+      selector: login
+    - name: init
+      label: "L'indirizzo email iniziale"
+      selector: init
+    - name: default_langcode
+      label: "La lingua di default"
+      selector: default_langcode
+    - name: field_codice_fiscale
+      label: "Il codice fiscale"
+      selector: field_codice_fiscale
+  ids:
+    uid:
+      type: integer
+    uuid:
+      type: string
+
+process:
+  uid: uid
+  langcode: langcode
+  preferred_langcode: preferred_langcode
+  preferred_admin_langcode: preferred_admin_langcode
+  name: name
+  mail: mail
+  timezone: timezone
+  status: status
+  created:
+    plugin: default_value
+    source: created
+    default_value: 0
+  changed:
+    plugin: default_value
+    source: changed
+    default_value: 0
+  access:
+    plugin: default_value
+    source: access
+    default_value: 0
+  login:
+    plugin: default_value
+    source: login
+    default_value: 0
+  init: init
+  default_langcode: default_langcode
+  field_codice_fiscale: field_codice_fiscale
+
+destination:
+  plugin: entity:user
+
+migration_dependencies: { }
