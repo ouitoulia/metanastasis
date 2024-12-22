@@ -2,9 +2,9 @@ SELECT
   file.fid AS 'mid'
   , file.uid AS 'uid'
   , 'image' AS 'bundle'
-  , file.filename AS 'name' -- togliere estensione
+  , REVERSE(SUBSTRING_INDEX(REVERSE(file.filename), '.', -1)) AS 'name' -- togliere estensione
   , file.fid AS 'field_media_image_target_id'
-  , file.filename AS 'field_media_image_alt' -- togliere estensione
+  , REVERSE(SUBSTRING_INDEX(REVERSE(file.filename), '.', -1)) AS 'field_media_image_alt' -- togliere estensione
   , NULL AS 'field_icona'
   , NULL AS 'field_trascrizione'
   , 'it' AS 'langcode'

@@ -1,0 +1,179 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - marvasi_migration
+id: mv_node_persona
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasi
+  - node
+  - node_persona
+migration_group: marvasi_user
+label: 'Tipo di contenuto Persona'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/marvasi_migration/artifact/node_persona.json'
+  item_selector: 0
+  fields:
+    - name: nid
+      label: "L'id del nodo"
+      selector: nid
+    - name: uid
+      label: "L'utente proprietario"
+      selector: uid
+    - name: type
+      label: "Il tipo"
+      selector: type
+    - name: title
+      label: "Il titolo"
+      selector: title
+    - name: field_ritratto_url
+      label: "L'url dell'avatar della persona"
+      selector: field_ritratto_url
+    - name: field_ritratto_alt
+      label: "La descrizione dell'avatar"
+      selector: field_ritratto_alt
+    - name: field_nome
+      label: "Il nome della persona"
+      selector: field_nome
+    - name: field_cognome
+      label: "Il cognome della persona"
+      selector: field_cognome
+    - name: field_abstract
+      label: "L'abstract"
+      selector: field_abstract
+    - name: field_telefono
+      label: "Il telefono"
+      selector: field_telefono
+    - name: field_email
+      label: "L'indirizzo o gli indirizzi email"
+      selector: field_email
+    - name: field_ruolo_persona
+      label: "Il ruolo della persona"
+      selector: field_ruolo_persona
+    - name: field_tipologia_posto
+      label: "Tipologia posto"
+      selector: field_tipologia_posto
+    - name: field_tipologia_incarico
+      label: "Tipologia incarico"
+      selector: field_tipologia_incarico
+    - name: field_tipologia_supplenza
+      label: "Tipologia supplenza"
+      selector: field_tipologia_supplenza
+    - name: field_data_fine
+      label: "Data di fine incarico"
+      selector: field_data_fine
+    - name: field_materie
+      label: "Materie insegnate"
+      selector: field_materie
+    - name: field_data_nascita
+      label: "La data di nascita"
+      selector: field_data_nascita
+    - name: field_genere
+      label: "Il genere della persona"
+      selector: field_genere
+    - name: field_codice_fiscale
+      label: "Il codice fiscale"
+      selector: field_codice_fiscale
+    - name: langcode
+      label: "La lingua dell'utente"
+      selector: langcode
+    - name: promote
+      label: "Flag promote"
+      selector: promote
+    - name: sticky
+      label: "Flag sticky"
+      selector: sticky
+    - name: status
+      label: "Lo stato del nodo"
+      selector: status
+    - name: created
+      label: "La data di creazione"
+      selector: created
+    - name: changed
+      label: "La data di aggiornamento"
+      selector: changed
+    - name: uuid
+      label: "L'uuid per riferimenti"
+      selector: uuid
+
+  ids:
+    nid:
+      type: integer
+    uuid:
+      type: string
+  constants:
+    ritratto_path: 'public://persona/ritratto/'
+
+process:
+  nid: nid
+  uid: uid
+  type: type
+  title: title
+  field_ritratto/target_id:
+    plugin: file_import
+    source: field_ritratto_url
+    destination: constants/ritratto_path
+    uid: uid
+    file_exists: replace
+    skip_on_missing_source: true
+    id_only: true
+  field_ritratto/alt: field_ritratto_alt
+  field_nome: field_nome
+  field_cognome: field_cognome
+  field_abstract: field_abstract
+  field_telefono: field_telefono
+  field_email: field_email
+
+#  field_ruolo_persona:
+#    - plugin: static_map
+#      source: permissions
+#      bypass: true
+#      map:
+
+  field_tipologia_posto: field_tipologia_posto
+
+#  field_tipologia_incarico:
+  #    - plugin: static_map
+  #      source: permissions
+  #      bypass: true
+  #      map:
+
+  field_tipologia_supplenza: field_tipologia_supplenza
+  field_data_fine: field_data_fine
+
+#  field_materie:
+  #    - plugin: static_map
+  #      source: permissions
+  #      bypass: true
+  #      map:
+
+  field_data_nascita: field_data_nascita
+  field_genere: field_genere
+  field_codice_fiscale: field_codice_fiscale
+  langcode: langcode
+  promote: promote
+  sticky: sticky
+  status: status
+  created: created
+  changed: changed
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: persona
+  translations: true
+
+migration_dependencies:
+  required:
+    - mv_users

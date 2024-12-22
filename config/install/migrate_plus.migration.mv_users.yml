@@ -81,9 +81,18 @@ source:
 
 process:
   uid: uid
-  langcode: langcode
-  preferred_langcode: preferred_langcode
-  preferred_admin_langcode: preferred_admin_langcode
+  langcode:
+    plugin: user_langcode
+    source: langcode
+    fallback_to_site_default: true
+  preferred_langcode:
+    plugin: user_langcode
+    source: preferred_langcode
+    fallback_to_site_default: true
+  preferred_admin_langcode:
+    plugin: user_langcode
+    source: preferred_admin_langcode
+    fallback_to_site_default: true
   name: name
   mail: mail
   timezone: timezone
@@ -105,8 +114,13 @@ process:
     source: login
     default_value: 0
   init: init
-  default_langcode: default_langcode
+  default_langcode:
+    plugin: default_value
+    default_value: 1
   field_codice_fiscale: field_codice_fiscale
+  roles:
+    plugin: default_value
+    default_value: authenticated
 
 destination:
   plugin: entity:user
