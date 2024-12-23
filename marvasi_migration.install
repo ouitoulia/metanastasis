@@ -6,11 +6,13 @@
  */
 function marvasi_migration_uninstall() {
   // Delete migration configurations.
-  \Drupal::configFactory()->getEditable('migrate_plus.migration.marvasi_files_managed')->delete();
-  \Drupal::configFactory()->getEditable('migrate_plus.migration.marvasi_node_persona')->delete();
-  \Drupal::configFactory()->getEditable('migrate_plus.migration.marvasi_users')->delete();
-  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.marvasi_file')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_files')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_media')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_persona')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_users')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.marvasi_files')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.marvasi_node')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.marvasi_taxonomy')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.marvasi_user')->delete();
 }
 
