@@ -13,7 +13,7 @@ migration_tags:
   - marvasi
   - node
   - node_persona
-migration_group: marvasi_user
+migration_group: marvasi_node
 label: 'Tipo di contenuto Persona'
 source:
   plugin: url
@@ -126,38 +126,135 @@ process:
     source: field_ritratto_url
     destination: constants/ritratto_path
     uid: uid
-    file_exists: replace
+    file_exists: use_existing
     skip_on_missing_source: true
     id_only: true
   field_ritratto/alt: field_ritratto_alt
   field_nome: field_nome
   field_cognome: field_cognome
   field_abstract: field_abstract
-  field_telefono: field_telefono
-  field_email: field_email
+  #field_telefono: field_telefono
+  #field_email: field_email
 
-#  field_ruolo_persona:
-#    - plugin: static_map
-#      source: permissions
-#      bypass: true
-#      map:
+  field_ruolo_persona:
+    - plugin: static_map
+      source: field_ruolo_persona
+      bypass: true
+      map:
+        #1: # "anonimo" viene gestito dalla nuova installazione
+        #2: # "autenticato" viene gestito dalla nuova installazione
+        #3: # "administrator" viene gestito a mano
+        #4: # "alunno" non vengono importati gli alunni
+        5: 1711 # "Docente" -> "Personale Docente"
+        #6: # "genitore" non vengono importati i genitori
+        7: 1723 # "Segreteria" -> "Personale amministrativo"
+        8: 1722 # "DSGA" -> "Direttore amministrativo (DSGA)"
+        9: 1701 # "Preside" -> "Dirigente Scolastico"
+        #10: # "Redattore" viene gestito a mano
+        #11: # "Capo redattore" viene gestito a mano
+        12: 1721 # "Collaboratore" -> "Personale non docente"
+        #13: # "Intranet" viene gestito a mano
+        14: 1732 # "Ex docente" -> "Ex docente"
+        #15:
+        #16:
+        #17: # "Coordinatore" viene gestito a mano
+        #18: # "Responsabile plesso" viene gestito a mano
 
   field_tipologia_posto: field_tipologia_posto
 
-#  field_tipologia_incarico:
-  #    - plugin: static_map
-  #      source: permissions
-  #      bypass: true
-  #      map:
+  field_tipologia_incarico:
+    - plugin: static_map
+      source: field_tipologia_incarico
+      bypass: true
+      map:
+        270: 751
+        271: 752
 
   field_tipologia_supplenza: field_tipologia_supplenza
+
   field_data_fine: field_data_fine
 
-#  field_materie:
-  #    - plugin: static_map
-  #      source: permissions
-  #      bypass: true
-  #      map:
+  field_materie:
+    - plugin: skip_on_empty
+      source: field_materie
+      method: process
+    - plugin: explode
+      source: field_materie
+      delimiter: ";"
+    - plugin: callback
+      callable: intval
+    - plugin: static_map
+      bypass: false
+      map:
+        # infanzia
+        02: 2184 # "Italiano" -> "I discorsi e le parole"
+        03: 2184 # "Inglese" -> "I discorsi e le parole"
+        04: 2184 # "Francese" -> "I discorsi e le parole"
+        05: 2185 # "Storia" -> "La conoscenza del mondo"
+        06: 2185 # "Geografia" -> "La conoscenza del mondo"
+        07: 2185 # "Matematica" -> "La conoscenza del mondo"
+        08: 2181 # "Religione" -> "Il sé e l’altro"
+        09: 2185 # "Scienze" -> "La conoscenza del mondo"
+        10: 2183 # "Musica" -> "Immagini, suoni, colori"
+        11: 2183 # "Arte e immagine" -> "Immagini, suoni, colori"
+        12: 2182 # "Scienze motorie" -> "Il corpo e il movimento"
+        13: 2185 # "Tecnologia" -> "La conoscenza del mondo"
+        14: 2185 # "Approfondimento" -> "I discorsi e le parole"
+        #15: 2115 # "Clarinetto" -> "Clarinetto"
+        #16: 2122 # "Pianoforte" -> "Pianoforte"
+        #17: 2121 # "Percussioni" -> "Percussioni"
+        #18: 2125 # "Violino" -> "Violino"
+        #90: # "Sostegno"
+        203: 2185 # "Informatica" -> "La conoscenza del mondo"
+        #204: # "Didattica"
+        354: 2181 # "Educazione civica" -> "Il sé e l’altro"
+
+        # primaria (arrivano con +1000)
+        1002: 2151 # "Italiano" -> "Italiano"
+        1003: 2152 # "Inglese" -> "Lingua inglese"
+        #1004: 2108 # "Francese" -> "Francese"
+        1005: 2153 # "Storia" -> "Storia"
+        1006: 2154 # "Geografia" -> "Geografia"
+        1007: 2155 # "Matematica" -> "Matematica"
+        1008: 2161 # "Religione" -> "Religione"
+        1009: 2156 # "Scienze" -> "Scienze"
+        1010: 2157 # "Musica" -> "Musica"
+        1011: 2158 # "Arte e immagine" -> "Arte e immagine"
+        1012: 2159 # "Scienze motorie" -> "Educazione fisica"
+        1013: 2160 # "Tecnologia" -> "Tecnologia"
+        1014: 2151 # "Approfondimento" -> "Italiano"
+        #1015: 2115 # "Clarinetto" -> "Clarinetto"
+        #1016: 2122 # "Pianoforte" -> "Pianoforte"
+        #1017: 2121 # "Percussioni" -> "Percussioni"
+        #1018: 2125 # "Violino" -> "Violino"
+        #1090: # "Sostegno"
+        1203: 2160 # "Informatica" -> "Tecnologia"
+        #1204: # "Didattica"
+        1354: 2151 # "Educazione civica" -> "Italiano"
+
+        # secondaria (arrivano con +2000)
+        2002: 2102 # "Italiano" -> "Italiano, storia e geografia"
+        2003: 2109 # "Inglese" -> "Inglese"
+        2004: 2108 # "Francese" -> "Francese"
+        2005: 2102 # "Storia" -> "Italiano, storia e geografia"
+        2006: 2102 # "Geografia" -> "Italiano, storia e geografia"
+        2007: 2103 # "Matematica" -> "Matematica e scienze"
+        2008: 2127 # "Religione" -> "Religione"
+        2009: 2103 # "Scienze" -> "Matematica e scienze"
+        2010: 2104 # "Musica" -> "Musica"
+        2011: 2101 # "Arte e immagine" -> "Arte e immagine"
+        2012: 2105 # "Scienze motorie" -> "Scienze motorie"
+        2013: 2106 # "Tecnologia" -> "Tecnologia"
+        2014: 2102 # "Approfondimento" -> "Storia" -> "Italiano, storia e geografia"
+        2015: 2115 # "Clarinetto" -> "Clarinetto"
+        2016: 2122 # "Pianoforte" -> "Pianoforte"
+        2017: 2121 # "Percussioni" -> "Percussioni"
+        2018: 2125 # "Violino" -> "Violino"
+        #2090: # "Sostegno"
+        2203: 2106 # "Informatica" -> "Tecnologia"
+        #2204: # "Didattica"
+        2354: 2102 # "Educazione civica" -> "Italiano, storia e geografia"
+    - plugin: log
 
   field_data_nascita: field_data_nascita
   field_genere: field_genere
