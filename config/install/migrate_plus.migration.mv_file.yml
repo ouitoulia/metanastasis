@@ -10,7 +10,7 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
   - json
-  - marvasi
+  - marvasivizzone
   - files
 migration_group: mv_files
 label: 'Importa i files da icmarvasivizzone.edu.it'

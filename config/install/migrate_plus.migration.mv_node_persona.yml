@@ -10,7 +10,7 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
   - json
-  - marvasi
+  - marvasivizzone
   - node
   - node_persona
 migration_group: mv_nodes
