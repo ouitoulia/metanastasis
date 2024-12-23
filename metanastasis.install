@@ -1,0 +1,18 @@
+<?php
+
+// metanastasis.uninstall
+/**
+ * Implements hook_uninstall().
+ */
+function metanastasis_uninstall() {
+  // Delete migration configurations.
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_file')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_media')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_persona')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_user')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_files')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_nodes')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_taxonomies')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_users')->delete();
+}
+

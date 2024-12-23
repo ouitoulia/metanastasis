@@ -1,8 +1,0 @@
-name: "Marvasi Migration"
-description: Questo è un modulo che importa il sito vecchio nel nuovo.
-package: "Ouitoulía"
-
-type: module
-core_version_requirement: ^10.3 || ^11
-dependencies:
-  - ouitoulia:sunchronizo

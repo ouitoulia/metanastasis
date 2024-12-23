@@ -3,7 +3,7 @@ status: true
 dependencies:
   enforced:
     module:
-      - marvasi_migration
+      - metanastasis
 id: mv_node_persona
 class: null
 field_plugin_method: null
@@ -13,7 +13,7 @@ migration_tags:
   - marvasi
   - node
   - node_persona
-migration_group: marvasi_node
+migration_group: mv_nodes
 label: 'Tipo di contenuto Persona'
 source:
   plugin: url
@@ -23,7 +23,7 @@ source:
     Accept: 'application/json; charset=utf-8'
     Content-Type: application/json
   urls:
-    - 'https://marvasi-migration.ddev.site/modules/custom/marvasi_migration/artifact/node_persona.json'
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_persona.json'
   item_selector: 0
   fields:
     - name: nid
@@ -272,4 +272,4 @@ destination:
 
 migration_dependencies:
   required:
-    - mv_users
+    - mv_user

@@ -3,9 +3,9 @@ status: true
 dependencies:
   enforced:
     module:
-      - marvasi_migration
-id: marvasi_node
-label: 'Marvasi - Node'
+      - metanastasis
+id: mv_nodes
+label: 'Marvasi Vizzone - Nodes'
 description: 'Gruppo di migrazioni che importa i nodi.'
 source_type: JSON
 module: null
