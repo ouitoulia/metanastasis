@@ -3,7 +3,7 @@ status: true
 dependencies:
   enforced:
     module:
-      - marvasi_migration
+      - metanastasis
 id: mv_media
 class: null
 field_plugin_method: null
@@ -12,7 +12,7 @@ migration_tags:
   - json
   - marvasi
   - media
-migration_group: marvasi_files
+migration_group: mv_files
 label: 'Importa i media da icmarvasivizzone.edu.it'
 source:
   plugin: url
@@ -22,7 +22,7 @@ source:
     Accept: 'application/json; charset=utf-8'
     Content-Type: application/json
   urls:
-    - 'https://marvasi-migration.ddev.site/modules/custom/marvasi_migration/artifact/media_image.json'
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/media_image.json'
   item_selector: 0
   fields:
     - name: mid
@@ -114,4 +114,4 @@ destination:
   translations: true
 migration_dependencies:
   required:
-    - mv_users
+    - mv_user

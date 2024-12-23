@@ -1,9 +1,8 @@
-# Marvasi Migration
+# Metanástasis
 
-Questo è un modulo che importa il sito vecchio nel nuovo.
+Μετανάστασις è un modulo che migra i contenuti dal sito vecchio al nuovo.
 
-Esegui le query dentro la cartella `sql` e salva il risultato in formato JSON-Clojure dentro `artifact`
+Esegui le query che si trovano nella cartella `sql` e salva il risultato
+in formato JSON-Clojure dentro la cartella `artifact`.
 
 Esegui le migrazioni.
-
-Fine.

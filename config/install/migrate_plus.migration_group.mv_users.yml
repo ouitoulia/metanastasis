@@ -3,9 +3,9 @@ status: true
 dependencies:
   enforced:
     module:
-      - marvasi_migration
-id: marvasi_user
-label: 'Marvasi - User'
+      - metanastasis
+id: mv_users
+label: 'Marvasi Vizzone - Utenti'
 description: 'Gruppo di migrazioni che importa gli utenti.'
 source_type: JSON
 module: null

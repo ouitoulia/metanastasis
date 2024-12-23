@@ -3,9 +3,9 @@ status: true
 dependencies:
   enforced:
     module:
-      - marvasi_migration
-id: marvasi_taxonomy
-label: 'Marvasi - Taxonomy'
+      - metanastasis
+id: mv_taxonomies
+label: 'Marvasi Vizzone - Taxonomies'
 description: 'Gruppo di migrazioni che importa le tassonomie.'
 source_type: JSON
 module: null

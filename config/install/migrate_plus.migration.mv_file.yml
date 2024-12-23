@@ -3,8 +3,8 @@ status: true
 dependencies:
   enforced:
     module:
-      - marvasi_migration
-id: mv_files
+      - metanastasis
+id: mv_file
 class: null
 field_plugin_method: null
 cck_plugin_method: null
@@ -12,7 +12,7 @@ migration_tags:
   - json
   - marvasi
   - files
-migration_group: marvasi_files
+migration_group: mv_files
 label: 'Importa i files da icmarvasivizzone.edu.it'
 source:
   plugin: url
@@ -22,7 +22,7 @@ source:
     Accept: 'application/json; charset=utf-8'
     Content-Type: application/json
   urls:
-    - 'https://marvasi-migration.ddev.site/modules/custom/marvasi_migration/artifact/file.json'
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/file.json'
   item_selector: 0
   fields:
     - name: fid
@@ -82,4 +82,4 @@ destination:
 
 migration_dependencies:
   required:
-    - mv_users
+    - mv_user

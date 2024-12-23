@@ -1,0 +1,8 @@
+name: "Metanástasis"
+description: "Μετανάστασις è un modulo che migra i contenuti dal sito vecchio al nuovo."
+package: "Ouitoulía"
+
+type: module
+core_version_requirement: ^10.3 || ^11
+dependencies:
+  - ouitoulia:sunchronizo
