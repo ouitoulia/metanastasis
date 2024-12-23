@@ -84,13 +84,14 @@ process:
     source: url
     destination: constants/images_media_path
     uid: uid
-    file_exists: replace
+    file_exists: use_existing
     skip_on_missing_source: true
     id_only: true
   field_media_image/alt:
     plugin: skip_on_empty
     source: field_media_image_alt
     method: process
+  field_media_image/created: created
   field_icona:
     plugin: skip_on_empty
     source: field_icona
@@ -102,11 +103,11 @@ process:
   langcode:
     plugin: default_value
     source: language
-    default_value: und
+    default_value: 'it'
   status:
     plugin: default_value
     source: published
-    default_value: 0
+    default_value: 1
   created: created
 
 destination:
