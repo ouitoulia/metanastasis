@@ -254,7 +254,6 @@ process:
         2203: 2106 # "Informatica" -> "Tecnologia"
         #2204: # "Didattica"
         2354: 2102 # "Educazione civica" -> "Italiano, storia e geografia"
-    - plugin: log
 
   field_data_nascita: field_data_nascita
   field_genere: field_genere
