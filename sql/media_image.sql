@@ -3,6 +3,7 @@ SELECT
   , file.uid AS 'uid'
   , 'image' AS 'bundle'
   , REVERSE(SUBSTRING_INDEX(REVERSE(file.filename), '.', -1)) AS 'name' -- togliere estensione
+  , file.filename AS 'filename'
   , file.fid AS 'field_media_image_target_id'
   , REVERSE(SUBSTRING_INDEX(REVERSE(file.filename), '.', -1)) AS 'field_media_image_alt' -- togliere estensione
   , NULL AS 'field_icona'
