@@ -10,6 +10,7 @@ SELECT
       ELSE 652
     END AS 'field_tipologia_notizia' -- id giusto
   , body.body_value AS 'field_abstract' -- pulire dai tag durante la migrazione
+  , GROUP_CONCAT(DISTINCT term.tid ORDER BY term.weight SEPARATOR ';') AS 'field_argomenti'
   , image.field_image_fid AS 'field_copertina_media_id' -- id media per collegare la copertina
   , body.body_value AS 'body_value' -- pulire dai tag durante la migrazione
   , GROUP_CONCAT(DISTINCT insegnante.field_insegnante_target_id ORDER BY insegnante.delta SEPARATOR ';') AS 'field_persone' -- id sono giusti
@@ -17,7 +18,6 @@ SELECT
   , GROUP_CONCAT(DISTINCT galleria.field_galleria_fid ORDER BY galleria.delta SEPARATOR ';') AS 'field_paragraph_gallery'
   , GROUP_CONCAT(DISTINCT video.field_video_input ORDER BY video.delta SEPARATOR ';') AS 'field_paragraph_video'
   , GROUP_CONCAT(DISTINCT allegati.field_allegati_fid ORDER BY allegati.delta SEPARATOR ';') AS 'field_paragraph_allegati'
-  , GROUP_CONCAT(DISTINCT term.name ORDER BY term.weight SEPARATOR ';') AS 'field_argomenti'
   , GROUP_CONCAT(DISTINCT CONCAT('luogo_',plesso.field_plesso_public_tid) ORDER BY plesso.field_plesso_public_tid SEPARATOR ';') AS 'field_luoghi'
   , NULL AS 'field_eventi'
   , 'it' AS 'langcode'

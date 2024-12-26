@@ -44,6 +44,7 @@ SELECT
   , 0 AS 'promote'
   , 0 AS 'sticky'
   , 1 AS 'status'
+  , 1413404636 AS 'created'
 FROM taxonomy_term_data term
   LEFT JOIN field_data_field_codice_meccanografico codice_m ON term.tid = codice_m.entity_id AND codice_m.bundle = 'plesso'
 WHERE term.vid = 4

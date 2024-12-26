@@ -8,6 +8,7 @@ function metanastasis_uninstall() {
   // Delete migration configurations.
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_file')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_media')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_luogo')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_persona')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_user')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_files')->delete();
