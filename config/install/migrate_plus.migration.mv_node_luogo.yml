@@ -1,0 +1,386 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - metanastasis
+id: mv_node_luogo
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasivizzone
+  - node
+  - node_luogo
+migration_group: mv_nodes
+label: 'Tipo di contenuto Luogo'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_luogo.json'
+  item_selector: 0
+  fields:
+    -
+      name: nid
+      label: 'ID del nodo'
+      selector: migration_id
+    -
+      name: uuid
+      label: 'UUID del nodo per referenza migrazione'
+      selector: uuid
+    -
+      name: uid
+      label: "L'UID del del proprietario del contenuto"
+      selector: uid
+    -
+      name: type
+      label: 'Il tipo di contenuto'
+      selector: type
+    -
+      name: title
+      label: 'Il titolo del contenuto'
+      selector: title
+    -
+      name: field_abstract
+      label: 'Descrizione breve'
+      selector: field_abstract
+    -
+      name: field_argomenti
+      label: Argomenti
+      selector: field_argomenti
+    -
+      name: field_tipologia_luogo
+      label: 'Il tipo di luogo'
+      selector: field_tipologia_luogo
+    -
+      name: field_copertina
+      label: 'Immagine di copertina'
+      selector: field_copertina
+    -
+      name: field_video
+      label: 'Video del luogo'
+      selector: field_video
+    -
+      name: field_galleria_immagini
+      label: 'Galleria di immagini'
+      selector: field_galleria_immagini
+    -
+      name: body_value
+      label: 'Descrizione estesa'
+      selector: body_value
+    -
+      name: field_luoghi
+      label: 'Se il luogo fa parte di un altro luogo'
+      selector: field_luoghi
+    -
+      name: field_indirizzo
+      label: 'Indirizzo del luogo'
+      selector: field_indirizzo
+    -
+      name: field_coordinate_geografiche
+      label: 'Coordinate geografiche del luogo'
+      selector: field_coordinate_geografiche
+    -
+      name: field_orario_pubblico
+      label: 'Gli orari di apertura del luogo'
+      selector: field_orario_pubblico
+    -
+      name: field_attributi_luogo
+      label: 'Modalità di accesso'
+      selector: field_attributi_luogo
+    -
+      name: field_email
+      label: Email
+      selector: field_email
+    -
+      name: field_pec
+      label: PEC
+      selector: field_pec
+    -
+      name: field_telefono
+      label: Telefono
+      selector: field_telefono
+    -
+      name: field_numero_alunni
+      label: 'Numero alunni'
+      selector: field_numero_alunni
+    -
+      name: field_numero_classi
+      label: 'Numero classi'
+      selector: field_numero_classi
+    -
+      name: field_struttura_esterna
+      label: 'Eventuali gestori esterni o terzi'
+      selector: field_struttura_esterna
+    -
+      name: field_prenotabile
+      label: 'Se il luogo è prenotabile'
+      selector: field_prenotabile
+    -
+      name: field_posti
+      label: 'Posti a sedere'
+      selector: field_posti
+    -
+      name: field_anno_costruzione
+      label: "L'anno di costruzione"
+      selector: field_anno_costruzione
+    -
+      name: field_numero_piani
+      label: 'Numero di piani'
+      selector: field_numero_piani
+    -
+      name: field_codice_identificativo
+      label: 'Il codice identificativo'
+      selector: field_codice_identificativo
+    -
+      name: field_codice_catastale_comune
+      label: 'Codice comune'
+      selector: field_codice_catastale_comune
+    -
+      name: field_uso_scolastico
+      label: 'Se il luogo è ad uso scolastico'
+      selector: field_uso_scolastico
+    -
+      name: field_destinazione_uso
+      label: 'Destinazione uso'
+      selector: field_destinazione_uso
+    -
+      name: field_anno_adattamento
+      label: 'Anno di adattamento'
+      selector: field_anno_adattamento
+    -
+      name: field_superficie_area_totale
+      label: 'Superficie area totale'
+      selector: field_superficie_area_totale
+    -
+      name: field_superficie_area_libera
+      label: 'Superficie area libera'
+      selector: field_superficie_area_libera
+    -
+      name: field_volume
+      label: Volume
+      selector: field_volume
+    -
+      name: field_sede_legale
+      label: 'Indica se il luogo è la sede legale della scuola'
+      selector: field_sede_legale
+    -
+      name: field_codice_meccanografico
+      label: 'Il codice meccanografico'
+      selector: field_codice_meccanografico
+    -
+      name: field_codice_fiscale
+      label: 'Il codice fiscale della scuola'
+      selector: field_codice_fiscale
+    -
+      name: field_ipa
+      label: 'Il codice ipa'
+      selector: field_ipa
+    -
+      name: field_codice_cuf
+      label: 'Il codice unico di fatturazione'
+      selector: field_codice_cuf
+    -
+      name: field_link
+      label: 'Collegamento con Scuola in chiaro'
+      selector: field_link
+    -
+      name: langcode
+      label: 'La lingua del contenuto'
+      selector: langcode
+    -
+      name: promote
+      label: 'Se il contenuto è promosso alla prima pagina'
+      selector: promote
+    -
+      name: sticky
+      label: 'Se il contenuto è in cima agli elenchi'
+      selector: sticky
+    -
+      name: status
+      label: 'Se il contenuto è pubblicato o meno'
+      selector: status
+    -
+      name: created
+      label: 'La data di pubblicazione'
+      selector: created
+  ids:
+    nid:
+      type: string
+    uuid:
+      type: string
+
+process:
+  #nid: nid
+  uid: uid
+  type: type
+  title: title
+  # field_abstract: -> shared_configuration
+  field_argomenti: field_argomenti
+  field_tipologia_luogo: field_tipologia_luogo
+  field_copertina:
+    plugin: skip_on_empty
+    source: field_copertina
+    method: process
+  field_video:
+    plugin: skip_on_empty
+    source: field_video
+    method: process
+  field_galleria_immagini:
+    plugin: skip_on_empty
+    source: field_galleria_immagini
+    method: process
+  body/value: body_value
+  field_luoghi:
+    plugin: skip_on_empty
+    source: field_luoghi
+    method: process
+  field_indirizzo:
+    plugin: skip_on_empty
+    source: field_indirizzo
+    method: process
+  field_coordinate_geografiche:
+    plugin: skip_on_empty
+    source: field_coordinate_geografiche
+    method: process
+  field_orario_pubblico:
+    plugin: skip_on_empty
+    source: field_orario_pubblico
+    method: process
+  field_attributi_luogo:
+    plugin: skip_on_empty
+    source: field_attributi_luogo
+    method: process
+  field_email:
+    plugin: skip_on_empty
+    source: field_email
+    method: process
+  field_telefono:
+    plugin: skip_on_empty
+    source: field_telefono
+    method: process
+  field_pec:
+    plugin: skip_on_empty
+    source: field_pec
+    method: process
+  field_numero_alunni:
+    plugin: skip_on_empty
+    source: field_numero_alunni
+    method: process
+  field_numero_classi:
+    plugin: skip_on_empty
+    source: field_numero_classi
+    method: process
+  field_struttura_esterna:
+    plugin: skip_on_empty
+    source: field_struttura_esterna
+    method: process
+  field_prenotabile:
+    plugin: skip_on_empty
+    source: field_prenotabile
+    method: process
+  field_posti:
+    plugin: skip_on_empty
+    source: field_posti
+    method: process
+  field_anno_costruzione:
+    plugin: skip_on_empty
+    source: field_anno_costruzione
+    method: process
+  field_numero_piani:
+    plugin: skip_on_empty
+    source: field_numero_piani
+    method: process
+  field_codice_identificativo:
+    plugin: skip_on_empty
+    source: field_codice_identificativo
+    method: process
+  field_codice_catastale_comune:
+    plugin: skip_on_empty
+    source: field_codice_catastale_comune
+    method: process
+  field_uso_scolastico:
+    plugin: skip_on_empty
+    source: field_uso_scolastico
+    method: process
+  field_destinazione_uso:
+    plugin: skip_on_empty
+    source: field_destinazione_uso
+    method: process
+  field_anno_adattamento:
+    plugin: skip_on_empty
+    source: field_anno_adattamento
+    method: process
+  field_superficie_area_totale:
+    plugin: skip_on_empty
+    source: field_superficie_area_totale
+    method: process
+  field_superficie_area_libera:
+    plugin: skip_on_empty
+    source: field_superficie_area_libera
+    method: process
+  field_volume:
+    plugin: skip_on_empty
+    source: field_volume
+    method: process
+  field_sede_legale:
+    plugin: skip_on_empty
+    source: field_sede_legale
+    method: process
+  field_codice_meccanografico:
+    plugin: skip_on_empty
+    source: field_codice_meccanografico
+    method: process
+  field_codice_fiscale:
+    plugin: skip_on_empty
+    source: field_codice_fiscale
+    method: process
+  field_ipa:
+    plugin: skip_on_empty
+    source: field_ipa
+    method: process
+  field_codice_cuf:
+    plugin: skip_on_empty
+    source: field_codice_cuf
+    method: process
+  field_link:
+    plugin: skip_on_empty
+    source: field_link
+    method: process
+  langcode:
+    plugin: skip_on_empty
+    source: langcode
+    method: process
+  promote:
+    plugin: default_value
+    source: promote
+    default_value: 0
+  sticky:
+    plugin: default_value
+    source: sticky
+    default_value: 0
+  status:
+    plugin: default_value
+    source: status
+    default_value: 0
+  created:
+    plugin: skip_on_empty
+    source: created
+    method: process
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: luogo
+  translations: true
+
+migration_dependencies:
+  required:
+    - mv_user
+    - mv_taxonomy_argomenti
+    - mv_node_persona

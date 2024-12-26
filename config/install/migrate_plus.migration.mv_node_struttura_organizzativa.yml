@@ -1,0 +1,260 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - metanastasis
+id: mv_node_struttura_organizzativa
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasivizzone
+  - node
+  - node_struttura_organizzativa
+migration_group: mv_nodes
+label: 'Tipo di contenuto Struttura organizzativa'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_struttura_organizzativa.json'
+  item_selector: 0
+  fields:
+    -
+      name: nid
+      label: 'ID del nodo'
+      selector: migration_id
+    -
+      name: uuid
+      label: 'UUID del nodo per referenza migrazione'
+      selector: uuid
+    -
+      name: uid
+      label: "L'UID del del proprietario del contenuto"
+      selector: uid
+    -
+      name: type
+      label: 'Il tipo di contenuto'
+      selector: type
+    -
+      name: title
+      label: 'Il titolo del contenuto'
+      selector: title
+    -
+      name: field_tipologia_struttura
+      label: 'La tipologia della struttura organizzativa'
+      selector: field_tipologia_struttura
+    -
+      name: field_copertina
+      label: 'Immagine di copertina'
+      selector: field_copertina
+    -
+      name: field_abstract
+      label: 'Descrizione breve'
+      selector: field_abstract
+    -
+      name: field_argomenti
+      label: Argomenti
+      selector: field_argomenti
+    -
+      name: body_value
+      label: 'Cosa fa'
+      selector: body_value
+    -
+      name: field_codice_meccanografico
+      label: 'Il codice meccanografico'
+      selector: field_codice_meccanografico
+    -
+      name: field_struttura_organizzativa
+      label: 'Eventualmente la struttura o le strutture da cui dipende'
+      selector: field_struttura_organizzativa
+    -
+      name: field_persona_responsabile
+      label: 'La persona responsabile della struttura organizzativa'
+      selector: field_persona_responsabile
+    -
+      name: field_persone
+      label: 'Le persone che fanno parte della struttura organizzativa'
+      selector: field_persone
+    -
+      name: field_persone_esterne
+      label: 'Altre persone che fano parte della struttura organizzativa ma che non hanno una scheda registrata.'
+      selector: field_persone_esterne
+    -
+      name: field_luoghi_gestiti
+      label: 'I luoghi gestiti dalla struttura organizzativa'
+      selector: field_luoghi_gestiti
+    -
+      name: field_luoghi
+      label: 'I luoghi in cui ha sede la struttura organizzativa'
+      selector: field_luoghi
+    -
+      name: field_telefono
+      label: Telefono
+      selector: field_telefono
+    -
+      name: field_email
+      label: Email
+      selector: field_email
+    -
+      name: langcode
+      label: 'La lingua del contenuto'
+      selector: langcode
+    -
+      name: promote
+      label: 'Se il contenuto è promosso alla prima pagina'
+      selector: promote
+    -
+      name: sticky
+      label: 'Se il contenuto è in cima agli elenchi'
+      selector: sticky
+    -
+      name: status
+      label: 'Se il contenuto è pubblicato o meno'
+      selector: status
+    -
+      name: created
+      label: 'La data di pubblicazione'
+      selector: created
+  ids:
+    nid:
+      type: string
+    uuid:
+      type: string
+
+process:
+  #nid: nid
+  uid: uid
+  type: type
+  title: title
+  field_tipologia_struttura:
+    plugin: skip_on_empty
+    source: field_tipologia_struttura
+    method: process
+  field_copertina:
+    plugin: skip_on_empty
+    source: field_copertina
+    method: process
+  field_abstract:
+    - plugin: skip_on_empty
+      source: field_abstract
+      method: process
+    - plugin: callback
+      callable: strip_tags
+  field_argomenti:
+    -
+      plugin: skip_on_empty
+      source: argomenti
+      method: process
+    -
+      plugin: sub_process
+      source: argomenti
+      process:
+        target_id: id
+  body/value: body_value
+  field_codice_meccanografico:
+    plugin: skip_on_empty
+    source: field_codice_meccanografico
+    method: process
+  field_struttura_organizzativa:
+    -
+      plugin: skip_on_empty
+      source: struttura_organizzativa
+      method: process
+    -
+      plugin: sub_process
+      source: struttura_organizzativa
+      process:
+        target_id: id
+  field_persona_responsabile:
+    - plugin: skip_on_empty
+      source: field_persona_responsabile
+      method: process
+    - plugin: explode
+      source: field_persona_responsabile
+      delimiter: ";"
+    - plugin: callback
+      callable: intval
+  field_persone:
+    - plugin: skip_on_empty
+      source: field_persone
+      method: process
+    - plugin: explode
+      source: field_persone
+      delimiter: ";"
+    - plugin: callback
+      callable: intval
+  field_persone_esterne:
+    plugin: skip_on_empty
+    source: field_persone_esterne
+    method: process
+  field_luoghi_gestiti:
+    - plugin: skip_on_empty
+      source: field_luoghi_gestiti
+      method: process
+    - plugin: explode
+      source: field_luoghi_gestiti
+      delimiter: ";"
+    - plugin: migration_lookup
+      migration:
+        - mv_node_luogo
+    - plugin: callback
+      callable: reset
+  field_luoghi:
+    - plugin: skip_on_empty
+      source: field_luoghi
+      method: process
+    - plugin: explode
+      source: field_luoghi
+      delimiter: ";"
+    - plugin: migration_lookup
+      migration:
+        - mv_node_luogo
+    - plugin: callback
+      callable: reset
+  field_telefono:
+    plugin: skip_on_empty
+    source: telefono
+    method: process
+  field_email:
+    plugin: skip_on_empty
+    source: email
+    method: process
+  langcode:
+    plugin: skip_on_empty
+    source: langcode
+    method: process
+  promote:
+    plugin: default_value
+    source: promote
+    default_value: 0
+  sticky:
+    plugin: default_value
+    source: sticky
+    default_value: 0
+  status:
+    plugin: default_value
+    source: status
+    default_value: 0
+  created:
+    plugin: skip_on_empty
+    source: created
+    method: process
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: struttura_organizzativa
+  translations: true
+
+migration_dependencies:
+  required:
+    - mv_user
+    - mv_taxonomy_argomenti
+    - mv_node_persona
+    - mv_node_luogo

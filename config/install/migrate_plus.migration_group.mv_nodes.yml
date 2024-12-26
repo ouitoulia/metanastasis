@@ -9,4 +9,273 @@ label: 'Marvasi Vizzone - Nodes'
 description: 'Gruppo di migrazioni che importa i nodi.'
 source_type: JSON
 module: null
-shared_configuration: null
+shared_configuration:
+  process:
+    field_abstract:
+      - plugin: skip_on_empty
+        source: field_abstract
+        method: process
+      - plugin: mv_dom_cleaner
+        clean_tags: true
+        remove_multiple_space: true
+        max_char: 160
+
+    field_copertina:
+      plugin: skip_on_empty
+      source: field_copertina
+      method: process
+
+    body/value:
+      - plugin: skip_on_empty
+        source: body_value
+        method: process
+      - plugin: mv_dom_cleaner
+        #      clean_tags: true
+        #      preserve_tags: '<a><p><strong><em><ul><ol><li><h2><h3><h4><h5><h6><blockquote><code><pre><table><thead><th><tbody><tr><td><img><figure><iframe>'
+        remove_attributes:
+          - class
+          - style
+          - face
+          - color
+        remove_empty_paragraphs: true
+
+    body/format:
+      - plugin: default_value
+        default_value: bootstrap_italia_2
+
+    field_argomenti:
+      - plugin: skip_on_empty
+        source: field_argomenti
+        method: process
+      - plugin: explode
+        source: field_argomenti
+        delimiter: ";"
+      - plugin: callback
+        callable: intval
+      - plugin: static_map
+        bypass: false
+        map:
+          27: 1453 # "Docenti" -> "Docenti"
+          28: 1479 # "ATA" -> "Personale ATA"
+          29: 1446 # "Genitori" -> "Genitori"
+          30: 1407 # "Alunni" -> "Alunni"
+          36: 1425 # "Consigli Istituto" -> "Consigli di istituto"
+          40: null # 1489 # "Rassegna stampa" -> field_tipologia_notizia
+          41: 1456 # "Edilizia scolastica" -> Istituto
+          46: 1514 # "Manifestazione" -> "Spettacoli"
+          47: 1407 # "Natale" -> "Alunni"
+          48: 1514 # "Spettacolo" -> "Spettacoli"
+          49: 1514 # "Recita" -> "Spettacoli"
+          50: 1514 # "Spettacolo" -> "Spettacoli"
+          51: 1427 # "Strumento musicale" -> "Corsi di musica"
+          52: 1514 # "Teatro" -> "Spettacoli"
+          53: 1407 # "Lavoretti" -> "Alunni"
+          57: 1516 # "Collegio docenti" -> "Collegio dei docenti"
+          58: 1472 # "Progetti" -> "Offerta formativa"
+          59: 1485 # "PTOF" -> "PTOF"
+          60: 1481 # "PON" -> "PON - Programma Operativo Nazionale"
+          61: 1517 # "POR" -> "POR - Programma Operativo Regionale"
+          62: null # Pizza
+          63: 1472 # "attività curricolari" -> "Offerta formativa"
+          64: 1430 # "Programmazioni" -> "Didattica"
+          65: 1410 # "limen" -> "Attività extracurricolari"
+          66: 1456 # "ic marvasi" -> "Istituto"
+          67: null # rosarno
+          68: 1410 # "pigotte" -> "Attività extracurricolari"
+          69: 1472 # "Progetti" -> "Offerta formativa"
+          70: 1485 # "POF" -> "PTOF"
+          71: 1498 # "Infanzia" -> "Scuola dell'infanzia"
+          72: null # bosco
+          73: null # marvasi
+          74: 1407 # "alunni" -> "Alunni"
+          75: 1514 # "Carnevale" -> "Spettacoli"
+          76: null # maschere
+          77: 1516 # "verbale ccd" -> "Collegio dei docenti"
+          78: 1453 # "docenti" -> "Docenti"
+          79: null # Carretta
+          80: null # Vizzone
+          81: 1514 # "Coriandoli" -> "Spettacoli"
+          82: 1515 # "legalità" -> "Legalità"
+          83: 1401 # "scuola" -> "Scuola"
+          84: null # San Ferdinando
+          85: null # arancia
+          86: 1514 # "party" -> "Spettacoli"
+          87: 1514 # "festa" -> "Spettacoli"
+          88: 1446 # "mamma" -> "Genitori"
+          89: null # sufrà -> non viene importato contiene il nome di una persona
+          91: 1514 # "Via Crucis" -> "Spettacoli"
+          92: 1416 # "bes" -> "BES - Bisogni Educativi Speciali"
+          93: 1416 # "dsa" -> "BES - Bisogni Educativi Speciali"
+          94: 1514 # "Pasqua" -> "Spettacoli"
+          102: null # vescovo
+          103: 1515 # "Gerbera Gialla" -> "Legalità"
+          104: 1515 # "Riferimenti" -> "Legalità"
+          105: 1515 # "Musella" -> "Legalità"
+          106: 1515 # "Grasso" -> "Legalità"
+          107: null # Albicocchè
+          108: 1497 # "sport in classe" -> "Scienze motorie"
+          109: null # scopelliti -> non viene importato contiene il nome di una persona
+          110: null # nutella
+          111: 1456 # "cutuli" -> "Istituto"
+          112: null # riciclo
+          113: 1456 # "bilancio sociale" -> "Istituto"
+          114: null # s. ferdinando
+          115: 1518 # "Opportunità" -> "Bacheca Opportunità"
+          202: null # dm 8/11
+          209: 1498 # "scuola dell'infanzia" -> "Scuola dell'infanzia"
+          210: 1446 # "Genitori" -> "Genitori"
+          211: 1410 # "presepi" -> "Attività extracurricolari"
+          212: 1410 # "tropea" -> "Attività extracurricolari"
+          213: 1473 # "open day" -> "Open Day"
+          214: 1514 # "locandina" -> "Spettacoli"
+          215: 1455 # "iscrizioni" -> "Iscrizioni"
+          216: 1410 # "expo" -> "Attività extracurricolari"
+          217: 1449 # "Uscita didattica" -> "Gita scolastica"
+          218: 1515 # "Senato" -> "Legalità"
+          219: 1410 # "Ambiente" -> "Attività extracurricolari"
+          220: 1410 # "Territorio" -> "Attività extracurricolari"
+          221: 1515 # "Sicurezza" -> "Legalità"
+          222: 1407 # "ragazzi" -> "Alunni"
+          223: 1515 # "testimone dei diritti umani" -> "Legalità"
+          224: 1515 # "testimone dei diritti" -> "Legalità"
+          225: 1515 # "Alberi liberi" -> "Legalità"
+          226: 1498 # "Figliuzzi" -> "Scuola dell'infanzia"
+          228: 1514 # "teatro Mesima ambiente degrado tutela sicurezza" -> "Spettacoli"
+          229: 1515 # "uguali" -> "Legalità"
+          230: 1463 # "Inglese" -> "Lingua inglese"
+          231: 1430 # "Quiz" -> "Didattica"
+          232: null # Rosetta Fiamingo -> non viene importato contiene il nome di una persona
+          233: null # Mirella Sorrenti -> non viene importato contiene il nome di una persona
+          234: null # Luisa Fiamingo -> non viene importato contiene il nome di una persona
+          235: null # Annarita Bisogni -> non viene importato contiene il nome di una persona
+          236: null # Corrao Martina -> non viene importato contiene il nome di una persona
+          237: null # Angela Pacile -> non viene importato contiene il nome di una persona
+          238: null # Luisa Fiamingo Annarita Bisogni Martina Corrao Angela Pacile -> non viene importato contiene il nome di una persona
+          239: null # Fiamingo Rosetta -> non viene importato contiene il nome di una persona
+          240: null # Mirella Sorrenti Fiamingo Rosetta -> non viene importato contiene il nome di una persona
+          241: null # FIAMINGO ROSETTA SORRENTI MIRELLA LARUFFA CONCETTA -> non viene importato contiene il nome di una persona
+          242: 1493 # "IL FIORE PIU' BELLO SEI TU" -> "Religione cattolica"
+          243: 1445 # "Sport" -> "Gare sportive"
+          244: null # corse
+          245: null # Fiamingo Rosetta Sorrenti Mirella Dimaio Elisa Luccisano Pasqualina -> non viene importato contiene il nome di una persona
+          246: 1519 # "Coding" -> "Coding"
+          247: 1427 # "Clarinetto" -> "Corsi di musica"
+          248: 1427 # "Percussioni" -> "Corsi di musica"
+          249: 1427 # "Pianoforte" -> "Corsi di musica"
+          250: 1427 # "Violino" -> "Corsi di musica"
+          251: 1499 # "primaria" -> "Scuola primaria"
+          260: 1430 # "attività didattica" -> "Attività"
+          261: 1503 # "Funzioni strumentali" -> "Servizi"
+          262: 1472 # "AREA N.1 - “Gestione del Piano dell'Offerta Formativa”" -> "Offerta formativa"
+          263: 1503 # "Ex AREA N.2 - “Valutazione e Autovalutazione di Istituto”" -> "Servizi"
+          264: 1515 # "AREA N.3 - “Inclusione e Integrazione”" -> "Legalità"
+          265: 1503 # AREA N.4 - “Gestione della Comunicazione istituzionale” -> "Servizi"
+          266: 1503 # Ex AREA N.5 - “Nuove Tecnologie nella Didattica e Gestione del Sito Web” -> "Servizi"
+          272: null # Fiamingo rosetta. -> non viene importato contiene il nome di una persona
+          273: null # Pacilè Angela -> non viene importato contiene il nome di una persona
+          274: null # Martina Corrao -> non viene importato contiene il nome di una persona
+          275: null # Rombolà Marica -> non viene importato contiene il nome di una persona
+          277: 1519 # "codeweek" -> "Coding"
+          278: 1499 # "scuola primaria" -> "Scuola primaria"
+          281: 1463 # "drama" -> "Lingua inglese"
+          282: 1430 # "divertenti" -> "Didattica"
+          283: 1452 # "clasi virtuali" -> "Informatica"
+          284: 1452 # "tablet" -> "Informatica"
+          285: 1452 # "smartphone" -> "Informatica"
+          286: null # Angela Pacilè -> non viene importato contiene il nome di una persona
+          287: null # Marilena Loiacono Wanda Naso -> non viene importato contiene il nome di una persona
+          288: null # Marilena Loiacono -> non viene importato contiene il nome di una persona
+          289: null # Wanda Naso -> non viene importato contiene il nome di una persona
+          290: null # Fiamingo Luisa -> non viene importato contiene il nome di una persona
+          291: null # Laruffa Concetta -> non viene importato contiene il nome di una persona
+          292: null # Rombolà Mariaconcetta -> non viene importato contiene il nome di una persona
+          293: null # Angelruffa Concetta -> non viene importato contiene il nome di una persona
+          294: null # Ligato Nancy -> non viene importato contiene il nome di una persona
+          295: null # Maria Concetta Rombolà -> non viene importato contiene il nome di una persona
+          296: 1493 # "festa del papà" -> "Religione cattolica"
+          298: 1407 # "alnni" -> "Alunni"
+          299: null # FIAMINGO ROSETTA PACILE' ANGELA FIAMINGO LUISA LOIACONO MARILENA -> non viene importato contiene il nome di una persona
+          300: 1514 # "manifestazioni" -> "Spettacoli"
+          301: 1514 # "fine anno scolastico" -> "Spettacoli"
+          302: null # "fine anno scolastico" -> non viene importato: ridondate
+          303: null # FIAMINGO ROSETTA PACILE' ANGELA -> non viene importato contiene il nome di una persona
+          304: 1463 # "eclil" -> "Lingua inglese"
+          305: 1463 # "science clil" -> "Lingua inglese"
+          306: 1463 # "clil" -> "Lingua inglese"
+          307: 1463 # "primaria clil" -> "Lingua inglese"
+          308: 1463 # "science eclil" -> "Lingua inglese"
+          309: 1493 # "nonni" -> "Religione cattolica"
+          311: null # "Gambarie" -> non viene importata voce vuota
+          312: null # "cucullaro" -> non viene importata voce vuota
+          313: 1443 # "Normativa" -> Formazione docenti
+          325: null # "quaderni" -> non viene importata voce vuota
+          326: 1457 # "italiano" -> "Italiano"
+          327: 1496 # "scienze" -> "Scienze"
+          328: null # "quinta" -> non viene importata voce vuota
+          351: 1430 # "Ex AREA N.5 - “Coordinamento Pedagogico di Rete”" -> "Didattica"
+          352: null # "Archivio" -> non viene importata voce vuota
+          353: 1410 # "Piano estate" -> "Attività extracurricolari"
+          355: 1430 # "AREA N.2 - “Innovazione didattica e tecnologica"" -> "Didattica"
+          359: 1472 # "A scuola di inclusione - 2022.10.1.1.102" -> "Offerta formativa"
+          361: 1472 # "Apprendimento e socialità - Fuoriserie - 10.2.2A-FSEPON-CL-2021-164" -> "Offerta formativa"
+          362: 1472 # "FIS" -> "Offerta formativa"
+          367: 1515 # "4 novembre" -> "Legalità"
+          368: 1520 # "eTwinning" -> "eTwinning"
+          370: 1515 # "No al Bullismo e al Cyberbullismo" -> "Legalità"
+          371: null # "cucullaro" -> non viene importata voce vuota
+          372: 1410 # "giornata benessere" -> "Attività extracurricolari"
+          373: 1522 # "Erasmusplus" -> "Erasmusplus"
+          374: 1520 # "eTwinning" -> "eTwinning"
+          375: 1521 # "PNRR" -> "PNRR"
+          417: 1438 # "erasmus" -> "Erasmus"
+          418: 1472 # "M4C1I3.1-2023-1143-P-36314 - Mattone su mattone DM 65/2023" -> "Offerta formativa"
+
+    field_persone:
+      - plugin: skip_on_empty
+        source: field_persone
+        method: process
+      - plugin: explode
+        source: field_persone
+        delimiter: ";"
+      - plugin: callback
+        callable: intval
+    field_persona_responsabile:
+      - plugin: skip_on_empty
+        source: field_persona_responsabile
+        method: process
+      - plugin: explode
+        source: field_persona_responsabile
+        delimiter: ";"
+      - plugin: callback
+        callable: intval
+
+    field_luoghi:
+      - plugin: skip_on_empty
+        source: field_luoghi
+        method: process
+      - plugin: explode
+        source: field_luoghi
+        delimiter: ";"
+      - plugin: migration_lookup
+        migration:
+          - mv_node_luogo
+      - plugin: callback
+        callable: reset
+
+    langcode:
+      plugin: skip_on_empty
+      source: langcode
+      method: process
+    promote:
+      plugin: default_value
+      source: promote
+      default_value: 0
+    sticky:
+      plugin: default_value
+      source: sticky
+      default_value: 0
+
+    created:
+      plugin: skip_on_empty
+      source: created
+      method: process
