@@ -187,3 +187,4 @@ migration_dependencies:
     - mv_node_persona
     - mv_node_luogo
     - mv_struttura_organizzativa
+    - mv_node_notizia_paragraph_gallery

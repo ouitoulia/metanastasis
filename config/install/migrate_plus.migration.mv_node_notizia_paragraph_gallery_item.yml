@@ -1,0 +1,99 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - metanastasis
+id: mv_node_notizia_paragraph_gallery_item
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasivizzone
+  - node_paragraphs
+  - node_paragraphs_gallery
+  - node_paragraphs_gallery_item
+migration_group: mv_paragraphs
+label: 'Paragrafo node gallery item'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_notizia_paragraph_gallery_item.json'
+  item_selector: 0
+  fields:
+    - name: migration_id
+      label: 'ID del nodo associato per riferimento migration_lookup'
+      selector: migration_id
+    - name: langcode
+      label: "La lingua dell'immagine"
+      selector: langcode
+    - name: target_id
+      label: "Il riferimento all'immagine"
+      selector: target_id
+    - name: alt
+      label: "La descrizione dell'immagine"
+      selector: alt
+    - name: title
+      label: "La descrizione dell'immagine"
+      selector: title
+    - name: width
+      label: "La larghezza dell'immagine"
+      selector: width
+    - name: height
+      label: "L'altezza dell'immagine"
+      selector: height
+    - name: created
+      label: "La data di invio del contenuto"
+      selector: created
+  ids:
+    migration_id:
+      type: string
+process:
+  #id: id
+  field_description:
+    - plugin: skip_on_empty
+      source: alt
+      method: process
+  field_background_image/langcode:
+    plugin: default_value
+    source: language
+    default_value: 'it'
+  field_background_image/target_id: target_id
+  field_background_image/alt:
+    - plugin: skip_on_empty
+      source: alt
+      method: process
+  #field_background_image/title: title
+  field_background_image/width:
+    - plugin: skip_on_empty
+      source: width
+      method: process
+  field_background_image/height:
+    - plugin: skip_on_empty
+      source: height
+      method: process
+  field_show_caption:
+    - plugin: default_value
+      default_value: 1
+
+  # langcode: -> shared_configuration
+  # promote: -> shared_configuration
+  # sticky: -> shared_configuration
+  status:
+    plugin: default_value
+    source: status
+    default_value: 0
+  # created: -> shared_configuration
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: gallery_item
+migration_dependencies:
+  required:
+    - mv_file
