@@ -47,5 +47,5 @@ WHERE
   AND file.uri NOT LIKE 'private://articoli/login%'
   AND file.uri NOT LIKE 'private://lim_%'
   AND file.uri NOT LIKE 'private://logo_classe_viva.png'
-ORDER BY file.uri ASC
+ORDER BY file.fid ASC
 ;
