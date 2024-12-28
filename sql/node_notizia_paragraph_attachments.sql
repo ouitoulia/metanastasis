@@ -2,7 +2,7 @@ SELECT
   CONCAT('article_',allegati.entity_id,'--attachments_',allegati.entity_id) AS 'migration_id'
   , JSON_ARRAYAGG(
       JSON_OBJECT(
-        'target_id', allegati.field_allegati_fid,
+        'migration_target_id', CONCAT('file_',allegati.field_allegati_fid),
         'description', IFNULL(allegati.field_allegati_description, ''),
         'langcode', CASE
                       WHEN allegati.language IS NULL OR allegati.language = 'und' THEN 'it'

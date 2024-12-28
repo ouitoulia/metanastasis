@@ -52,7 +52,14 @@ process:
     - plugin: sub_process
       source: field_file
       process:
-        target_id: target_id
+        target_id:
+          - plugin: migration_lookup
+            source: migration_target_id
+            migration: mv_file
+            source_ids: migration_fid
+          - plugin: log
+          - plugin: callback
+            callable: reset
         description:
           - plugin: skip_on_empty
             source: description

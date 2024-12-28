@@ -30,9 +30,9 @@ source:
     - name: migration_id
       label: 'ID del nodo associato per riferimento migration_lookup'
       selector: migration_id
-    - name: target_id
-      label: "Il riferimento all'immagine"
-      selector: target_id
+    - name: migration_target_id
+      label: "Il riferimento all'immagine tramite l'ID di migrazione"
+      selector: migration_target_id
     - name: alt
       label: "La descrizione dell'immagine"
       selector: alt
@@ -63,11 +63,17 @@ process:
     - plugin: skip_on_empty
       source: alt
       method: process
+  field_background_image/target_id:
+    - plugin: migration_lookup
+      source: migration_target_id
+      migration: mv_file
+      source_ids: migration_fid
+    - plugin: callback
+      callable: reset
   field_background_image/langcode:
     plugin: default_value
     source: language
     default_value: 'it'
-  field_background_image/target_id: target_id
   field_background_image/alt:
     - plugin: skip_on_empty
       source: alt

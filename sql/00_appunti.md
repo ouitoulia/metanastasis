@@ -19,6 +19,10 @@
 
 https://icmarvasivizzone.edu.it/it/notizie/saluti-del-dirigente-scolastico-nicolantonio-cutuli
 
+# Da recuperare data corretta in file_managed
+Persona/ritratto
+media/immagini
+
 ./
 ├── 00file_caricati
 ├── albopretorio -> `field_allegati`

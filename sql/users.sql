@@ -16,7 +16,7 @@ SELECT
   , 'it' AS 'default_langcode'
   , CASE
       WHEN UCASE(TRIM(cf.field_codice_fiscale_value)) IN ('AAAAAA01A01A000A', '91006770803', 'AAABBB12A12A123A', 'AAABBB11A11A111S', 'AAABBB00A00A000A') THEN NULL
-      ELSE UCASE(TRIM(cf.field_codice_fiscale_value))
+      ELSE SHA2(UCASE(TRIM(cf.field_codice_fiscale_value)), 256)
     END AS 'field_codice_fiscale'
 FROM users u
   LEFT JOIN field_data_field_codice_fiscale cf ON u.uid = cf.entity_id AND cf.bundle = 'user'
