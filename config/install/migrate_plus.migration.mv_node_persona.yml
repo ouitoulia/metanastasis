@@ -53,12 +53,12 @@ source:
     - name: field_abstract
       label: "L'abstract"
       selector: field_abstract
-    - name: field_telefono
-      label: "Il telefono"
-      selector: field_telefono
-    - name: field_email
-      label: "L'indirizzo o gli indirizzi email"
-      selector: field_email
+#    - name: field_telefono
+#      label: "Il telefono"
+#      selector: field_telefono
+#    - name: field_email
+#      label: "L'indirizzo o gli indirizzi email"
+#      selector: field_email
     - name: field_ruolo_persona
       label: "Il ruolo della persona"
       selector: field_ruolo_persona

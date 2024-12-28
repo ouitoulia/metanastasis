@@ -1,6 +1,6 @@
 SELECT
-  file.fid AS 'fid' -- si mantiene invariato
-  , file.uuid AS 'uuid' -- solo come migration_id
+  CONCAT('file_',file.fid) AS 'migration_fid'
+  , file.uuid AS 'uuid'
   , 'it' AS 'langcode'
   , file.uid AS 'uid'
   , file.filename AS 'filename'

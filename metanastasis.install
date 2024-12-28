@@ -8,11 +8,20 @@ function metanastasis_uninstall() {
   // Delete migration configurations.
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_file')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_media')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_menu_link')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_luogo')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_notizia')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_notizia_paragraph_attachments')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_notizia_paragraph_gallery')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_notizia_paragraph_gallery_item')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_persona')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_struttura_organizzativa')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_taxonomy_argomenti')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_user')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_files')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_menu')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_nodes')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_paragraphs')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_taxonomies')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_users')->delete();
 }

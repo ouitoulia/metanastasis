@@ -8,8 +8,8 @@ SELECT
   , TRIM(nome.field_nome_value) AS 'field_nome'
   , TRIM(cognome.field_cognome_value) AS 'field_cognome'
   , CONCAT('Profilo di ', TRIM(nome.field_nome_value),' ',TRIM(cognome.field_cognome_value)) AS 'field_abstract'
-  , TRIM(telefono.field_telefono_value) AS 'field_telefono'
-  , TRIM(u.mail) AS 'field_email'
+ -- , TRIM(telefono.field_telefono_value) AS 'field_telefono'
+ -- , TRIM(u.mail) AS 'field_email'
   , GROUP_CONCAT(
       DISTINCT
       CASE WHEN role.rid NOT IN (1,2,3,4,6,10,11,13,15,16,17,18) THEN role.rid ELSE NULL END
@@ -57,7 +57,7 @@ SELECT
   , NULL AS 'field_genere'
   , CASE
       WHEN UCASE(TRIM(cf.field_codice_fiscale_value)) IN ('AAAAAA01A01A000A', '91006770803', 'AAABBB12A12A123A', 'AAABBB11A11A111S', 'AAABBB00A00A000A') THEN NULL
-      ELSE UCASE(TRIM(cf.field_codice_fiscale_value))
+      ELSE SHA2(UCASE(TRIM(cf.field_codice_fiscale_value)), 256)
     END AS 'field_codice_fiscale'
   , 'it' AS 'langcode'
   , 0 AS 'promote'

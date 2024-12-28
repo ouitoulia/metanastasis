@@ -13,7 +13,7 @@ migration_tags:
   - marvasivizzone
   - menu
   - mv_menu_link
-migration_group: mv_menu
+migration_group: mv_menus
 label: 'Menu Link esterni'
 source:
   plugin: url

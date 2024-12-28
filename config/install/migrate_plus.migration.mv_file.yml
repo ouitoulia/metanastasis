@@ -25,11 +25,11 @@ source:
     - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/file.json'
   item_selector: 0
   fields:
-    - name: fid
-      label: "Id del file"
-      selector: fid
+    - name: migration_fid
+      label: "Id del file come riferimento per migration_lookup"
+      selector: migration_fid
     - name: uuid
-      label: "Uuid del file"
+      label: "Uuid del file come altro riferimento per migration_lookup"
       selector: uuid
     - name: langcode
       label: "La lingua del file"
@@ -59,13 +59,14 @@ source:
       label: "La data di aggiornamento"
       selector: changed
   ids:
-    fid:
-      type: integer
+    migration_fid:
+      type: string
     uuid:
       type: string
 
 process:
-  fid: fid
+  #fid: migration_fid
+  #uuid: uuid
   langcode: langcode
   uid: uid
   filename: filename

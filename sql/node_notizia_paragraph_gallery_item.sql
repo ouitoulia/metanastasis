@@ -4,7 +4,7 @@ SELECT
       WHEN galleria.language IS NULL OR galleria.language = 'und' THEN 'it'
       ELSE galleria.language
     END AS 'langcode'
-  , galleria.field_galleria_fid AS 'target_id'
+  , CONCAT('file_',galleria.field_galleria_fid) AS 'migration_target_id'
   , CASE
       WHEN galleria.field_galleria_alt IS NULL OR galleria.field_galleria_alt = '' THEN galleria.field_galleria_title
       ELSE galleria.field_galleria_alt
