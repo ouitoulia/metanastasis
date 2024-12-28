@@ -1,7 +1,7 @@
 SELECT
   CONCAT('article_',galleria.entity_id,'--gallery_',galleria.entity_id) AS 'migration_id'
   , 0 AS 'field_overlay'
-  , 'double' AS 'field_gallery_grid_type'
+  , 'masonry' AS 'field_gallery_grid_type'
   , GROUP_CONCAT(
       DISTINCT CONCAT('article_',galleria.entity_id,'--gallery-item_',galleria.field_galleria_fid)
       ORDER BY galleria.delta

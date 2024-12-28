@@ -24,7 +24,8 @@ source:
     Content-Type: application/json
   urls:
     - 'https://ouitoulia.github.io/krene/demo/tassonomia_argomenti.json'
-    #- 'https://ouitoulia.github.io/krene/demo/tassonomia_custom_override.json'
+    - 'https://ouitoulia.github.io/krene/demo/tassonomia_custom_override.json'
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/data/argomenti.json'
   item_selector: data
   fields:
     -
