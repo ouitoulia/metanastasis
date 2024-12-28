@@ -30,9 +30,6 @@ source:
     - name: migration_id
       label: 'ID del nodo associato per riferimento migration_lookup'
       selector: migration_id
-    - name: langcode
-      label: "La lingua dell'immagine"
-      selector: langcode
     - name: target_id
       label: "Il riferimento all'immagine"
       selector: target_id
@@ -48,6 +45,12 @@ source:
     - name: height
       label: "L'altezza dell'immagine"
       selector: height
+    - name: langcode
+      label: "La lingua dell'immagine"
+      selector: langcode
+    - name: status
+      label: "Lo stato del contenuto"
+      selector: status
     - name: created
       label: "La data di invio del contenuto"
       selector: created
@@ -82,14 +85,18 @@ process:
     - plugin: default_value
       default_value: 1
 
-  # langcode: -> shared_configuration
-  # promote: -> shared_configuration
-  # sticky: -> shared_configuration
+  langcode:
+    plugin: skip_on_empty
+    source: langcode
+    method: process
   status:
     plugin: default_value
     source: status
-    default_value: 0
-  # created: -> shared_configuration
+    default_value: 1
+  created:
+    plugin: skip_on_empty
+    source: created
+    method: process
 
 destination:
   plugin: 'entity_reference_revisions:paragraph'

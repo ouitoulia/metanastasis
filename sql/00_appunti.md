@@ -17,6 +17,8 @@
     Materiali Didattici     materiali_didattici => materiali-didattici/immagini
     Pagina Base             page => pagina/galleria
 
+https://icmarvasivizzone.edu.it/it/notizie/saluti-del-dirigente-scolastico-nicolantonio-cutuli
+
 ./
 ├── 00file_caricati
 ├── albopretorio -> `field_allegati`

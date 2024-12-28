@@ -69,12 +69,12 @@ source:
       label: 'Gli eventi correlati'
       selector: field_eventi
 
-    - name: field_paragraph_gallery
-      label: 'Il paragraph gallery'
-      selector: field_paragraph_gallery
-
-    #field_paragraph_video
-    #field_paragraph_allegati
+    - name: field_extra_info
+      label: 'Il paragraph multimedia'
+      selector: field_extra_info
+#    - name: field_paragraph_video
+#      label: 'Il paragraph video'
+#      selector: field_paragraph_video
 
     - name: langcode
       label: 'La lingua del contenuto'
@@ -127,42 +127,26 @@ process:
       process:
         target_id: id
 
-  field_extra_info:
+  _extra_info_items:
     - plugin: skip_on_empty
-      source: field_paragraph_gallery
+      source: field_extra_info
       method: process
+    - plugin: explode
+      source: field_extra_info
+      delimiter: ";"
+    - plugin: migration_lookup
+      migration:
+        - mv_node_notizia_paragraph_gallery
+        - mv_node_notizia_paragraph_attachments
+      source_ids: migration_id
+  field_extra_info:
     - plugin: sub_process
-      source: '@value'
+      source: '@_extra_info_items'
       process:
-        type:
-          plugin: default_value
-          default_value: gallery
-        field_gallery_item:
-          - plugin: explode
-            source: field_paragraph_gallery
-            delimiter: ";"
-          - plugin: callback
-            callable: intval
-          - plugin: log
-          - plugin: sub_process
-            source: '@value'
-            process:
-              type:
-                plugin: default_value
-                default_value: gallery_item
-              field_background_image:
-                - plugin: log
-                - plugin: migration_lookup
-                  migration:
-                    - mv_media_file # Assicura che questa migrazione gestisca i file
-                  source: '@value' # Fid dal JSON
-          - plugin: log
-
-
-
+        target_id: '0'
+        target_revision_id: '1'
 
   #field_paragraph_video
-  #field_paragraph_allegati
 
   # langcode: -> shared_configuration
   # promote: -> shared_configuration
@@ -188,3 +172,4 @@ migration_dependencies:
     - mv_node_luogo
     - mv_struttura_organizzativa
     - mv_node_notizia_paragraph_gallery
+    - mv_node_notizia_paragraph_attachments

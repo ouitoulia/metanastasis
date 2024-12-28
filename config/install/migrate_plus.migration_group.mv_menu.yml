@@ -1,0 +1,12 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - metanastasis
+id: mv_menu
+label: 'Marvasi Vizzone - Menu'
+description: 'Gruppo di migrazioni che importa i menu.'
+source_type: JSON
+module: null
+shared_configuration: null
