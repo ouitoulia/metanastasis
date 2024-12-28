@@ -15,18 +15,40 @@ SELECT
   , body.body_value AS 'body_value' -- pulire dai tag durante la migrazione
   , GROUP_CONCAT(DISTINCT insegnante.field_insegnante_target_id ORDER BY insegnante.delta SEPARATOR ';') AS 'field_persone' -- id sono giusti
   , NULL AS 'field_persona_responsabile'
-  , GROUP_CONCAT(DISTINCT video.field_video_input ORDER BY video.delta SEPARATOR ';') AS 'field_paragraph_video'
+--  , GROUP_CONCAT(DISTINCT video.field_video_input ORDER BY video.delta SEPARATOR ';') AS 'field_paragraph_video'
   , CASE
+      WHEN galleria.field_galleria_fid IS NOT NULL AND allegati.field_allegati_fid IS NOT NULL AND video.field_video_input IS NOT NULL
+        THEN CONCAT(
+          CONCAT('article_', node.nid, '--gallery_', node.nid),
+          ';',
+          CONCAT('article_', node.nid, '--attachments_', node.nid),
+          ';',
+          CONCAT('article_', node.nid, '--video_', node.nid)
+        )
       WHEN galleria.field_galleria_fid IS NOT NULL AND allegati.field_allegati_fid IS NOT NULL
         THEN CONCAT(
           CONCAT('article_', node.nid, '--gallery_', node.nid),
           ';',
           CONCAT('article_', node.nid, '--attachments_', node.nid)
         )
+      WHEN galleria.field_galleria_fid IS NOT NULL AND video.field_video_input IS NOT NULL
+        THEN CONCAT(
+          CONCAT('article_', node.nid, '--gallery_', node.nid),
+          ';',
+          CONCAT('article_', node.nid, '--video_', node.nid)
+        )
+      WHEN allegati.field_allegati_fid IS NOT NULL AND video.field_video_input IS NOT NULL
+        THEN CONCAT(
+          CONCAT('article_', node.nid, '--attachments_', node.nid),
+          ';',
+          CONCAT('article_', node.nid, '--video_', node.nid)
+        )
       WHEN galleria.field_galleria_fid IS NOT NULL
         THEN CONCAT('article_', node.nid, '--gallery_', node.nid)
       WHEN allegati.field_allegati_fid IS NOT NULL
         THEN CONCAT('article_', node.nid, '--attachments_', node.nid)
+      WHEN video.field_video_input IS NOT NULL
+        THEN CONCAT('article_', node.nid, '--video_', node.nid)
       ELSE NULL
     END AS 'field_extra_info'
   , GROUP_CONCAT(DISTINCT CONCAT('luogo_',plesso.field_plesso_public_tid) ORDER BY plesso.field_plesso_public_tid SEPARATOR ';') AS 'field_luoghi'
