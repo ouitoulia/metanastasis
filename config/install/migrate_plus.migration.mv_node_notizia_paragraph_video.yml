@@ -1,0 +1,75 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - metanastasis
+id: mv_node_notizia_paragraph_video
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasivizzone
+  - node_paragraphs
+  - node_paragraphs_video
+migration_group: mv_paragraphs
+label: 'Paragrafo node video'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_notizia_paragraph_video.json'
+  item_selector: 0
+  fields:
+    - name: migration_id
+      label: "ID del nodo associato per riferimento migration_lookup"
+      selector: migration_id
+    - name: langcode
+      label: "La lingua dell'immagine"
+      selector: langcode
+    - name: status
+      label: "Lo stato del contenuto"
+      selector: status
+    - name: created
+      label: "La data di invio del contenuto"
+      selector: created
+  ids:
+    migration_id:
+      type: string
+
+process:
+  #id: id
+
+  field_video/target_id:
+    - plugin: migration_lookup
+      source: migration_id
+      migration: mv_media_video
+      source_ids: migration_id
+    - plugin: log
+    - plugin: callback
+      callable: reset
+
+  langcode:
+    plugin: skip_on_empty
+    source: langcode
+    method: process
+  status:
+    plugin: default_value
+    source: status
+    default_value: 1
+  created:
+    plugin: skip_on_empty
+    source: created
+    method: process
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: remote_video
+migration_dependencies:
+  required:
+    - mv_media_video
