@@ -3,7 +3,7 @@ SELECT
   , term.uuid AS 'uuid'
   , 1 AS 'uid'
   , 'luogo' AS 'type'
-  , term.name AS 'title'
+  , TRIM(term.name) AS 'title'
   , term.description AS 'field_abstract'
   , 1501 AS 'field_argomenti' -- id aggiornato
   , 1008 AS 'field_tipologia_luogo' -- id aggiornato

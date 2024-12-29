@@ -3,7 +3,7 @@ SELECT
   , node.uid AS 'uid' -- id giusto
   , node.`uuid`
   , 'circolare' AS 'type'
-  , node.title AS 'title'
+  , TRIM(node.title) AS 'title'
   , NULL AS 'field_numero_circolare'
   , NULL AS 'field_anno_scolastico' -- si potrebbe ricavare dal created
   , body.body_value AS 'field_abstract' -- pulire dai tag durante la migrazione

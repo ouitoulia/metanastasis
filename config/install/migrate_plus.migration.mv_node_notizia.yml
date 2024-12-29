@@ -138,6 +138,7 @@ process:
       migration:
         - mv_node_notizia_paragraph_gallery
         - mv_node_notizia_paragraph_attachments
+        - mv_node_notizia_paragraph_video
       source_ids: migration_id
   field_extra_info:
     - plugin: sub_process
@@ -174,3 +175,4 @@ migration_dependencies:
     - mv_node_notizia_paragraph_gallery_item
     - mv_node_notizia_paragraph_gallery
     - mv_node_notizia_paragraph_attachments
+    - mv_node_notizia_paragraph_video

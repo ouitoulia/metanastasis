@@ -3,7 +3,7 @@ SELECT
   , node.uid AS 'uid' -- id giusto
   , node.`uuid`
   , 'documento' AS 'type'
-  , node.title AS 'title'
+  , TRIM(node.title) AS 'title'
   , body.body_value AS 'field_abstract' -- pulire dai tag durante la migrazione
   , GROUP_CONCAT(DISTINCT area.field_area_tid ORDER BY area.field_area_tid SEPARATOR ';') AS 'field_argomenti'
   , body.body_value AS 'body_value' -- pulire dai tag durante la migrazione

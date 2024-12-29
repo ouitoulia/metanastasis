@@ -6,10 +6,10 @@ SELECT
     END AS 'langcode'
   , CONCAT('file_',galleria.field_galleria_fid) AS 'migration_target_id'
   , CASE
-      WHEN galleria.field_galleria_alt IS NULL OR galleria.field_galleria_alt = '' THEN galleria.field_galleria_title
-      ELSE galleria.field_galleria_alt
+      WHEN galleria.field_galleria_alt IS NULL OR galleria.field_galleria_alt = '' THEN TRIM(galleria.field_galleria_title)
+      ELSE TRIM(galleria.field_galleria_alt)
   END AS 'alt'
-  , galleria.field_galleria_title AS 'title'
+  , TRIM(galleria.field_galleria_title) AS 'title'
   , galleria.field_galleria_width AS 'width'
   , galleria.field_galleria_height AS 'height'
   , node.created AS 'created'
