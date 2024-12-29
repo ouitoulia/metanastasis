@@ -3,10 +3,10 @@ SELECT
   , term.uuid AS 'uuid'
   , 1 AS 'uid'
   , 'struttura_organizzativa' AS 'type'
-  , term.name AS 'title'
+  , TRIM(term.name) AS 'title'
   , CASE WHEN term.tid IN (57,36,407,261) THEN 1307 ELSE 1306 END AS 'field_tipologia_struttura' -- id nuovo
   , NULL AS 'field_copertina'
-  , term.description AS 'field_abstract'
+  , TRIM(term.description) AS 'field_abstract'
   , 1401 AS 'field_argomenti' -- id nuovo
   , NULL AS 'body_value'
   , codice_m.field_codice_meccanografico_value AS 'field_codice_meccanografico'

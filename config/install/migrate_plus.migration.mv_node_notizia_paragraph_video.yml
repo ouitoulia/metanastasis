@@ -45,12 +45,11 @@ source:
 process:
   #id: id
 
-  field_video/target_id:
+  field_video:
     - plugin: migration_lookup
       source: migration_id
       migration: mv_media_video
       source_ids: migration_id
-    - plugin: log
     - plugin: callback
       callable: reset
 
@@ -63,13 +62,13 @@ process:
     source: status
     default_value: 1
   created:
-    plugin: skip_on_empty
-    source: created
-    method: process
+    - plugin: skip_on_empty
+      source: created
+      method: process
 
 destination:
   plugin: 'entity_reference_revisions:paragraph'
-  default_bundle: remote_video
+  default_bundle: video
 migration_dependencies:
   required:
     - mv_media_video

@@ -17,7 +17,25 @@
     Materiali Didattici     materiali_didattici => materiali-didattici/immagini
     Pagina Base             page => pagina/galleria
 
+`drush migrate:import --update --tag marvasivizzone --execute-dependencies`
+
 https://icmarvasivizzone.edu.it/it/notizie/saluti-del-dirigente-scolastico-nicolantonio-cutuli
+
+# Spostare i file
+vedi campi `=> paragraph ==> da spostare a mano in attachments`
+
+```shell
+cp /path/to/public/blog/allegati/* /path/to/public/attachments/
+cp /path/to/public/articolo/allegati/* /path/to/public/attachments/
+```
+
+```sql
+UPDATE file_managed
+SET uri = REPLACE(uri, 'public://blog/allegati', 'public://attachments'),
+uri = REPLACE(uri, 'public://articolo/allegati', 'public://attachments')
+WHERE uri LIKE 'public://blog/allegati%'
+OR uri LIKE 'public://articolo/allegati%';
+```
 
 # Da recuperare data corretta in file_managed
 Persona/ritratto
@@ -28,12 +46,12 @@ media/immagini
 ├── albopretorio -> `field_allegati`
 ├── amministrazione-trasparente -> `field_allegati`
 ├── articolo
-│ ├── allegati  -> `field_allegati` > da valutare paragraph
+│ ├── allegati  -> `field_allegati` => paragraph ==> da spostare a mano in attachments
 │ ├── gallery   -> `field_galleria` > da valutare paragraph
 │ ├── immagine  -> `field_image` ==> media
 │ └── immagini  -> `field_image` ==> media
 ├── blog
-│ ├── allegati -> `field_allegati` > da valutare paragraph
+│ ├── allegati -> `field_allegati` => paragraph ==> da spostare a mano in attachments
 │ ├── galleria -> `field_galleria` > da valutare paragraph
 │ └── immagine -> `field_image` ==> media
 ├── book ==> NON MIGRATO OBSOLETO

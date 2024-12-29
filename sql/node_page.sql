@@ -3,7 +3,7 @@ SELECT
   , node.`uuid`
   , node.uid AS 'uid'
   , 'page' AS 'type'
-  , node.title AS 'title'
+  , TRIM(node.title) AS 'title'
   , image.field_image_fid as 'field_copertina_media_id' -- id riferimento a media per la copertina
   , body.body_value AS 'body_value'
   , video.field_video_input AS 'field_paragraph_video' -- nessun contenuto per questo tipo

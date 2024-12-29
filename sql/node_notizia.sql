@@ -3,7 +3,7 @@ SELECT
   , node.`uuid`
   , node.uid AS 'uid' -- id giusto
   , 'article' AS 'type'
-  , node.title AS 'title'
+  , TRIM(node.title) AS 'title'
   , CASE
       WHEN term.tid = 40 THEN 653
       WHEN node.type = 'blog' THEN 651
@@ -15,7 +15,6 @@ SELECT
   , body.body_value AS 'body_value' -- pulire dai tag durante la migrazione
   , GROUP_CONCAT(DISTINCT insegnante.field_insegnante_target_id ORDER BY insegnante.delta SEPARATOR ';') AS 'field_persone' -- id sono giusti
   , NULL AS 'field_persona_responsabile'
---  , GROUP_CONCAT(DISTINCT video.field_video_input ORDER BY video.delta SEPARATOR ';') AS 'field_paragraph_video'
   , CASE
       WHEN galleria.field_galleria_fid IS NOT NULL AND allegati.field_allegati_fid IS NOT NULL AND video.field_video_input IS NOT NULL
         THEN CONCAT(

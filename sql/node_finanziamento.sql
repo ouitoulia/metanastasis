@@ -3,7 +3,7 @@ SELECT
   , term.uuid AS 'uuid'
   , 1 AS 'uid'
   , 'finanziamento' AS 'type'
-  , term.name AS 'title'
+  , TRIM(term.name) AS 'title'
   , parent.parent AS 'field_tipologia_finanziamento' -- id vecchio
   , term.description AS 'field_abstract'
   , 1472 AS 'field_argomenti' -- id nuovo

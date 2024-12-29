@@ -1,6 +1,8 @@
 SELECT
   CONCAT('article_',video.entity_id,'--video_',video.entity_id) AS 'migration_id'
   , 'remote_video' AS 'bundle'
+  , TRIM(node.title) AS 'title'
+  , node.uid AS 'uid'
   , video.field_video_input AS 'field_video_url'
   , CASE
       WHEN node.language IS NULL OR node.language = 'und' THEN 'it'

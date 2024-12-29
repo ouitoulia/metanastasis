@@ -3,7 +3,7 @@ SELECT
   , JSON_ARRAYAGG(
       JSON_OBJECT(
         'migration_target_id', CONCAT('file_',allegati.field_allegati_fid),
-        'description', IFNULL(allegati.field_allegati_description, ''),
+        'description', IFNULL(TRIM(allegati.field_allegati_description), ''),
         'langcode', CASE
                       WHEN allegati.language IS NULL OR allegati.language = 'und' THEN 'it'
                       ELSE allegati.language
