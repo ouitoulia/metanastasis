@@ -1,0 +1,210 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - metanastasis
+id: mv_node_finanziamento
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasivizzone
+  - node
+  - node_finanziamento
+migration_group: mv_nodes
+label: 'Tipo di contenuto finanziamento'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_finanziamento.json'
+  item_selector: 0
+  fields:
+    - name: migration_id
+      label: "L'id del nodo da usare come riferimento di migrazione"
+      selector: migration_id
+    - name: uuid
+      label: "L'uuid per riferimenti"
+      selector: uuid
+    - name: uid
+      label: "L'utente proprietario"
+      selector: uid
+    - name: type
+      label: "Il tipo"
+      selector: type
+    - name: title
+      label: "Il titolo"
+      selector: title
+
+    - name: field_tipologia_finanziamento
+      label: "La tipologia di finanziamento"
+      selector: field_tipologia_finanziamento
+    - name: field_abstract
+      label: 'Descrizione breve'
+      selector: field_abstract
+    - name: field_argomenti
+      label: 'Argomenti'
+      selector: field_argomenti
+    - name: field_codice_cup
+      label: "Il codice CUP"
+      selector: field_codice_cup
+    - name: field_codice_identificativo
+      label: "Il codice identificativo"
+      selector: field_codice_identificativo
+    - name: field_importo_finanziamento
+      label: "L'importo del finanziamento"
+      selector: field_importo_finanziamento
+    - name: field_stato_progetto
+      label: "Lo stato del progetto"
+      selector: field_stato_progetto
+    - name: field_copertina
+      label: 'Immagine di copertina'
+      selector: field_copertina
+    - name: body_value
+      label: 'Corpo della notizia'
+      selector: body_value
+    - name: field_link
+      label: "Link"
+      selector: field_link
+    - name: field_data_inizio
+      label: "La data di inizio"
+      selector: field_data_inizio
+    - name: field_data_fine
+      label: "La data di fine"
+      selector: field_data_fine
+    - name: field_struttura_responsabile
+      label: "Struttura responsabile del progetto"
+      selector: field_struttura_responsabile
+    - name: field_persona_responsabile
+      label: "Le persone responsabili"
+      selector: field_persona_responsabile
+    - name: field_persone
+      label: 'Le persone coinvolte'
+      selector: field_persone
+    - name: field_persone_esterne
+      label: "Persone esterne alla scuola"
+      selector: field_persone_esterne
+    - name: field_collaborazioni
+      label: "Collaborazioni"
+      selector: field_collaborazioni
+
+    - name: langcode
+      label: "La lingua dell'utente"
+      selector: langcode
+    - name: promote
+      label: "Flag promote"
+      selector: promote
+    - name: sticky
+      label: "Flag sticky"
+      selector: sticky
+    - name: status
+      label: "Lo stato del nodo"
+      selector: status
+    - name: created
+      label: "La data di creazione"
+      selector: created
+    - name: changed
+      label: "La data di aggiornamento"
+      selector: changed
+
+  ids:
+    migration_id:
+      type: string
+    uuid:
+      type: string
+
+process:
+  #nid: nid
+  uid: uid
+  type: type
+  title: title
+
+  field_tipologia_finanziamento:
+    - plugin: static_map
+      source: field_tipologia_finanziamento
+      bypass: false
+      map:
+        58: 1160 # Progetti -> FAMI
+        60: 1157 # PON -> PON 2014/2020
+        61: 1158 # POR -> POR
+        356: 1153 # Monitor 440 -> Monitor 440
+        363: 1152 # FIS -> FIS
+        #364: 1160 # FAMI - FAMI
+        375: 1154 # PNRR
+        414: 1161 # PN 21-27
+
+  # field_abstract: -> shared_configuration
+  # field_argomenti: -> shared_configuration
+  field_codice_cup:
+    - plugin: skip_on_empty
+      source: field_codice_cup
+      method: process
+  field_codice_identificativo:
+    - plugin: skip_on_empty
+      source: field_codice_identificativo
+      method: process
+  field_importo_finanziamento:
+    - plugin: skip_on_empty
+      source: field_importo_finanziamento
+      method: process
+  field_stato_progetto:
+    - plugin: skip_on_empty
+      source: field_stato_progetto
+      method: process
+  # field_copertina: -> shared_configuration
+  # body/value: -> shared_configuration
+  field_link:
+    - plugin: skip_on_empty
+      source: field_link
+      method: process
+  field_data_inizio:
+    - plugin: skip_on_empty
+      source: field_data_inizio
+      method: process
+  field_data_fine:
+    - plugin: skip_on_empty
+      source: field_data_fine
+      method: process
+  field_struttura_responsabile:
+    - plugin: skip_on_empty
+      source: field_struttura_responsabile
+      method: process
+  # field_persona_responsabile: -> shared_configuration
+  # field_persone: -> shared_configuration
+  field_persone_esterne:
+    - plugin: skip_on_empty
+      source: field_persone_esterne
+      method: process
+  field_collaborazioni:
+    - plugin: skip_on_empty
+      source: field_collaborazioni
+      method: process
+
+  # langcode: -> shared_configuration
+  # promote: -> shared_configuration
+  # sticky: -> shared_configuration
+  status:
+    plugin: default_value
+    source: status
+    default_value: 1
+  # created: -> shared_configuration
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: finanziamento
+  translations: true
+
+migration_dependencies:
+  required:
+    - mv_user
+    - mv_taxonomy_argomenti
+    - mv_file
+    - mv_media
+    - mv_node_persona
+    - mv_struttura_organizzativa

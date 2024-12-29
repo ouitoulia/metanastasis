@@ -47,12 +47,12 @@ media/immagini
 ├── amministrazione-trasparente -> `field_allegati`
 ├── articolo
 │ ├── allegati  -> `field_allegati` => paragraph ==> da spostare a mano in attachments
-│ ├── gallery   -> `field_galleria` > da valutare paragraph
+│ ├── gallery   -> `field_galleria` => paragraph
 │ ├── immagine  -> `field_image` ==> media
 │ └── immagini  -> `field_image` ==> media
 ├── blog
 │ ├── allegati -> `field_allegati` => paragraph ==> da spostare a mano in attachments
-│ ├── galleria -> `field_galleria` > da valutare paragraph
+│ ├── galleria -> `field_galleria` => paragraph
 │ └── immagine -> `field_image` ==> media
 ├── book ==> NON MIGRATO OBSOLETO
 │ ├── allegati -> `field_allegati` ==> NON MIGRATO OBSOLETO

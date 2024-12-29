@@ -5,14 +5,14 @@ SELECT
   , 'finanziamento' AS 'type'
   , TRIM(term.name) AS 'title'
   , parent.parent AS 'field_tipologia_finanziamento' -- id vecchio
-  , term.description AS 'field_abstract'
-  , 1472 AS 'field_argomenti' -- id nuovo
+  , TRIM(term.description) AS 'field_abstract'
+  , '69' AS 'field_argomenti' -- id vecchio
   , NULL AS 'field_codice_cup'
   , NULL AS 'field_codice_identificativo'
   , NULL AS 'field_importo_finanziamento'
   , NULL AS 'field_stato_progetto'
   , NULL AS 'field_copertina'
-  , term.description AS 'body_value'
+  , TRIM(term.description) AS 'body_value'
   , NULL AS 'field_link'
   , NULL AS 'field_data_inizio'
   , NULL AS 'field_data_fine'
@@ -48,7 +48,7 @@ WHERE
     OR term.tid = 360
     OR term.tid = 364
     OR term.tid = 410
-    OR term.tid = 359
+    OR term.tid = 359 -- nel body c'è un'immagine da migrare da private://
   )
 ORDER BY term.weight ASC
 ;
