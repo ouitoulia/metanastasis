@@ -41,6 +41,7 @@ source:
     - name: title
       label: 'Il titolo del contenuto'
       selector: title
+
     - name: field_tipologia_notizia
       label: 'Tipologia notizia'
       selector: field_tipologia_notizia
@@ -68,13 +69,9 @@ source:
     - name: field_eventi
       label: 'Gli eventi correlati'
       selector: field_eventi
-
     - name: field_extra_info
       label: 'Il paragraph multimedia'
       selector: field_extra_info
-#    - name: field_paragraph_video
-#      label: 'Il paragraph video'
-#      selector: field_paragraph_video
 
     - name: langcode
       label: 'La lingua del contenuto'

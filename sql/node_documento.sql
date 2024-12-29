@@ -28,9 +28,9 @@ SELECT
   , NULL AS 'field_eventi'
   , NULL AS 'field_progetti'
   , NULL AS 'field_percorso_di_studio'
-  , NULL AS 'field_notizie'
+  , NULL AS 'field_notizie' -- se notizia ha un vecchio tid di field_area
   , NULL AS 'field_classi'
-  , NULL AS 'field_finanziamenti'
+  , NULL AS 'field_finanziamenti' -- se field_area è "IN (term.tid)" vedi node_finanziamento.sql
   , NULL AS 'field_frequenza'
   , NULL AS 'field_struttura_responsabile'
   , GROUP_CONCAT(DISTINCT at.field_categoria_albo_tid ORDER BY at.field_categoria_albo_tid SEPARATOR ';') AS 'amministrazione_trasparente'
