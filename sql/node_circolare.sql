@@ -20,9 +20,12 @@ SELECT
         )
     END AS 'field_anno_scolastico' -- viene ricavato dal created
   , TRIM(body.body_value) AS 'field_abstract' -- pulire dai tag durante la migrazione
-  , IFNULL(
-      GROUP_CONCAT(DISTINCT tags.field_tags_tid ORDER BY tags.delta SEPARATOR ';'),
-      '1423'
+  , CONCAT(
+      IFNULL(
+        GROUP_CONCAT(DISTINCT tags.field_tags_tid ORDER BY tags.delta SEPARATOR ';'),
+        '1423;'
+      ),
+      GROUP_CONCAT(DISTINCT at.field_categoria_albo_tid ORDER BY at.field_categoria_albo_tid SEPARATOR ';')
     ) AS 'field_argomenti'
   , GROUP_CONCAT(DISTINCT area.field_area_tid ORDER BY area.field_area_tid SEPARATOR ';') AS 'field_destinatari'
   , NULL AS 'field_data_oblio'
@@ -49,7 +52,6 @@ SELECT
   , TRIM(cig.field_cig_value) AS 'field_cig'
   , TRIM(cup.field_cup_value) AS 'field_cup'
   , data.field_data_scadenza_value AS 'field_data_scadenza'
-  , GROUP_CONCAT(DISTINCT at.field_categoria_albo_tid ORDER BY at.field_categoria_albo_tid SEPARATOR ';') AS 'amministrazione_trasparente'
   -- FINE ALTRI DATI -----------------------------------------------------------------------------------------------------------------------------------
   , 'it' AS 'langcode'
   , node.promote AS 'promote'

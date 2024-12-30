@@ -147,7 +147,7 @@ process:
         "2023_2024": 14
         "2024_2025": 15
   # field_abstract: -> shared_configuration
-  field_argomenti: field_argomenti # <--- fa l'override dello shared non cambiare
+  # field_argomenti: -> field_argomenti
   field_destinatari:
     - plugin: skip_on_empty
       source: field_destinatari
