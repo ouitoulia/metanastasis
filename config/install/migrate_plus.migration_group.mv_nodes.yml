@@ -55,11 +55,14 @@ shared_configuration:
       - plugin: static_map
         bypass: false
         map:
+          24: null # Bandi di gara e contratti -> è una categoria AT viene migrata in altro vocabolario
+          26: null # Graduatorie -> è una categoria AT viene migrata in altro vocabolario
           27: 1453 # "Docenti" -> "Docenti"
           28: 1479 # "ATA" -> "Personale ATA"
           29: 1446 # "Genitori" -> "Genitori"
           30: 1407 # "Alunni" -> "Alunni"
           36: 1425 # "Consigli Istituto" -> "Consigli di istituto"
+          37: null # Atti generali -> è una categoria AT viene migrata in altro vocabolario
           40: null # 1489 # "Rassegna stampa" -> field_tipologia_notizia
           41: 1456 # "Edilizia scolastica" -> Istituto
           46: 1514 # "Manifestazione" -> "Spettacoli"
@@ -107,6 +110,8 @@ shared_configuration:
           92: 1416 # "bes" -> "BES - Bisogni Educativi Speciali"
           93: 1416 # "dsa" -> "BES - Bisogni Educativi Speciali"
           94: 1514 # "Pasqua" -> "Spettacoli"
+          98: null # Convocazioni -> è una categoria AT viene migrata in altro vocabolario
+          100: null # Organi collegiali -> è una categoria AT viene migrata in altro vocabolario
           102: null # vescovo
           103: 1515 # "Gerbera Gialla" -> "Legalità"
           104: 1515 # "Riferimenti" -> "Legalità"
@@ -121,6 +126,13 @@ shared_configuration:
           113: 1456 # "bilancio sociale" -> "Istituto"
           114: null # s. ferdinando
           115: 1518 # "Opportunità" -> "Bacheca Opportunità"
+          118: null # Disposizioni generali -> è una categoria AT viene migrata in altro vocabolario
+          123: 1475 # "Organizzazione "-> "Organigramma"
+          124: null # Organi di indirizzo politico e di amministrazione e gestione, con l'indicazione delle rispettive competenze -> è una categoria AT viene migrata in altro vocabolario
+          138: null # Personale -> è una categoria AT viene migrata in altro vocabolario
+          147: 1415 # "Contrattazione collettiva" -> "Bacheca Sindacale"
+          175: 1503 # "Sovvenzioni, contributi, sussidi, vantaggi economici" -> "Servizi"
+          199: null # Altri contenuti -> è una categoria AT viene migrata in altro vocabolario
           202: null # dm 8/11
           209: 1498 # "scuola dell'infanzia" -> "Scuola dell'infanzia"
           210: 1446 # "Genitori" -> "Genitori"
@@ -208,6 +220,9 @@ shared_configuration:
           311: null # "Gambarie" -> non viene importata voce vuota
           312: null # "cucullaro" -> non viene importata voce vuota
           313: 1443 # "Normativa" -> Formazione docenti
+          314: 1415 # "Bacheca sindacale" -> "Bacheca sindacale"
+          315: null # Atti delle amministrazioni aggiudicatrici e degli enti aggiudicatori distintamente per ogni procedura -> è una categoria AT viene migrata in altro vocabolario
+          317: null # Avvisi -> è una categoria AT viene migrata in altro vocabolario
           325: null # "quaderni" -> non viene importata voce vuota
           326: 1457 # "italiano" -> "Italiano"
           327: 1496 # "scienze" -> "Scienze"
@@ -227,8 +242,11 @@ shared_configuration:
           373: 1522 # "Erasmusplus" -> "Erasmusplus"
           374: 1520 # "eTwinning" -> "eTwinning"
           375: 1521 # "PNRR" -> "PNRR"
+          386: null # Titolari di incarichi politici, di amministrazione, di direzione o di governo -> è una categoria AT viene migrata in altro vocabolario
+          397: 1404 # "Contratti integrativi" -> "Albo sindacale"
           417: 1438 # "erasmus" -> "Erasmus"
           418: 1472 # "M4C1I3.1-2023-1143-P-36314 - Mattone su mattone DM 65/2023" -> "Offerta formativa"
+          1423: 1423 # "Circolari" -> "Circolari"
 
     field_persone:
       - plugin: skip_on_empty
