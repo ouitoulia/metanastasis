@@ -5,23 +5,49 @@ SELECT
   , 'circolare' AS 'type'
   , TRIM(node.title) AS 'title'
   , NULL AS 'field_numero_circolare'
-  , NULL AS 'field_anno_scolastico' -- si potrebbe ricavare dal created
-  , body.body_value AS 'field_abstract' -- pulire dai tag durante la migrazione
+-- field_anno_scolastico
+  , CASE
+      WHEN FROM_UNIXTIME(node.created, '%m%d') >= '0901'
+        THEN CONCAT(
+          FROM_UNIXTIME(node.created, '%Y'),
+          '_',
+          FROM_UNIXTIME(node.created, '%Y') + 1
+        )
+        ELSE CONCAT(
+          FROM_UNIXTIME(node.created, '%Y') - 1,
+          '_',
+          FROM_UNIXTIME(node.created, '%Y')
+        )
+    END AS 'field_anno_scolastico' -- viene ricavato dal created
+  , TRIM(body.body_value) AS 'field_abstract' -- pulire dai tag durante la migrazione
+  , IFNULL(
+      GROUP_CONCAT(DISTINCT tags.field_tags_tid ORDER BY tags.delta SEPARATOR ';'),
+      '1423'
+    ) AS 'field_argomenti'
   , GROUP_CONCAT(DISTINCT area.field_area_tid ORDER BY area.field_area_tid SEPARATOR ';') AS 'field_destinatari'
   , NULL AS 'field_data_oblio'
-  -- DA ATTENZIONARE BENE ------------------------------------------------------------------------------------------------------------------------------
-  , GROUP_CONCAT(DISTINCT allegati.field_allegati_fid ORDER BY allegati.delta SEPARATOR ';') AS 'field_allegati_tid' -- gli allegati vanno importati mantenendo gli id
-  , GROUP_CONCAT(DISTINCT file.uri ORDER BY file.uid SEPARATOR ';') AS 'field_allegati_uri' -- copia da "/albopretorio/..." a "/circolare/allegati/..."
-  , 'Descrizione' AS  'field_allegati_desc' -- fai migrazione ad oc per recuperare la description sul campo field_data_field_allegati
-  -- FINE DA ATTENZIONARE BENE -------------------------------------------------------------------------------------------------------------------------
+  , JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'migration_target_id', CONCAT('file_',allegati.field_allegati_fid),
+        'description', IFNULL(
+                        NULLIF(TRIM(allegati.field_allegati_description), ''),
+                        REPLACE(REPLACE(file.filename, '_', ' '), '.pdf', '')
+                       ),
+        'langcode', CASE
+                      WHEN allegati.language IS NULL OR allegati.language = 'und' THEN 'it'
+                      ELSE allegati.language
+                    END
+      )
+      ORDER BY allegati.delta
+    ) AS 'field_allegati'
   , NULL AS 'field_link'
   , NULL AS 'field_eventi'
-  , body.body_value AS 'body_value'
+  , TRIM(body.body_value) AS 'body_value'
   , NULL AS 'field_persona_responsabile'
   -- ALTRI DATI ----------------------------------------------------------------------------------------------------------------------------------------
-  , protocollo.field_protocollo_value AS 'field_protocollo'
-  , cig.field_cig_value AS 'field_cig'
-  , cup.field_cup_value AS 'field_cup'
+  , TRIM(protocollo.field_protocollo_value) AS 'field_protocollo'
+  , TRIM(cig.field_cig_value) AS 'field_cig'
+  , TRIM(cup.field_cup_value) AS 'field_cup'
   , data.field_data_scadenza_value AS 'field_data_scadenza'
   , GROUP_CONCAT(DISTINCT at.field_categoria_albo_tid ORDER BY at.field_categoria_albo_tid SEPARATOR ';') AS 'amministrazione_trasparente'
   -- FINE ALTRI DATI -----------------------------------------------------------------------------------------------------------------------------------
@@ -36,6 +62,10 @@ FROM node
   LEFT JOIN field_data_field_area area ON node.nid = area.entity_id AND area.bundle IN ('albo_pretorio', 'documenti') AND area.field_area_tid IN (30,27,29,28) -- recupera i destinatari
   LEFT JOIN field_data_field_allegati allegati ON node.nid = allegati.entity_id AND allegati.bundle IN ('albo_pretorio', 'documenti') -- recupera gli allegati
   LEFT JOIN file_managed file ON allegati.field_allegati_fid = file.fid
+  -- le due seguenti recuperano l'area e i tag che verranno messi nello stesso campo
+  -- LEFT JOIN field_data_field_area area_tag ON node.nid = area.entity_id AND area_tag.bundle IN ('albo_pretorio', 'documenti') AND area_tag.field_area_tid NOT IN (30,27,29,28)
+  LEFT JOIN field_data_field_tags tags ON node.nid = tags.entity_id AND tags.bundle IN ('albo_pretorio', 'documenti')
+  -- LEFT JOIN taxonomy_term_data term ON tags.field_tags_tid = term.tid OR area_tag.field_area_tid = term.tid
   -- Recupero altri dati
   LEFT JOIN field_data_field_protocollo protocollo ON node.nid = protocollo.entity_id AND protocollo.bundle IN ('albo_pretorio', 'documenti')
   LEFT JOIN field_data_field_cig cig ON node.nid = cig.entity_id AND cig.bundle IN ('albo_pretorio', 'documenti')
