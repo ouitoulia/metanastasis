@@ -26,6 +26,7 @@ source:
     - 'https://ouitoulia.github.io/krene/demo/tassonomia_argomenti.json'
     - 'https://ouitoulia.github.io/krene/demo/tassonomia_custom_override.json'
     - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/data/argomenti.json'
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/data/tipologia_documenti.json'
   item_selector: data
   fields:
     -

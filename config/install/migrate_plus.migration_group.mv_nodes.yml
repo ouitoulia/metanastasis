@@ -37,6 +37,7 @@ shared_configuration:
           - style
           - face
           - color
+          - align
         remove_empty_paragraphs: true
 
     body/format:
@@ -296,4 +297,8 @@ shared_configuration:
     created:
       plugin: skip_on_empty
       source: created
+      method: process
+    changed:
+      plugin: skip_on_empty
+      source: changed
       method: process

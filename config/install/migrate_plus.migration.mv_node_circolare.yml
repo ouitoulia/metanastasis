@@ -92,7 +92,7 @@ source:
       selector: amministrazione_trasparente
 
     - name: langcode
-      label: "La lingua dell'utente"
+      label: "La lingua del contenuto"
       selector: langcode
     - name: promote
       label: "Flag promote"
@@ -127,6 +127,9 @@ process:
       source: field_numero_circolare
       method: process
   field_anno_scolastico:
+    - plugin: skip_on_empty
+      source: field_anno_scolastico
+      method: process
     - plugin: static_map
       source: field_anno_scolastico
       bypass: false
@@ -169,6 +172,9 @@ process:
       source: field_data_oblio
       method: process
   field_allegati:
+    - plugin: skip_on_empty
+      source: field_allegati
+      method: process
     - plugin: sub_process
       source: field_allegati
       process:

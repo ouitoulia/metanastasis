@@ -87,7 +87,7 @@ source:
       label: "Il codice fiscale"
       selector: field_codice_fiscale
     - name: langcode
-      label: "La lingua dell'utente"
+      label: "La lingua del contenuto"
       selector: langcode
     - name: promote
       label: "Flag promote"

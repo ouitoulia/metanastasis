@@ -95,7 +95,7 @@ source:
       selector: field_collaborazioni
 
     - name: langcode
-      label: "La lingua dell'utente"
+      label: "La lingua del contenuto"
       selector: langcode
     - name: promote
       label: "Flag promote"
@@ -130,14 +130,15 @@ process:
       source: field_tipologia_finanziamento
       bypass: false
       map:
-        58: 1160 # Progetti -> FAMI
+        58: 1151 # Progetti -> Altro
         60: 1157 # PON -> PON 2014/2020
         61: 1158 # POR -> POR
         356: 1153 # Monitor 440 -> Monitor 440
         363: 1152 # FIS -> FIS
-        #364: 1160 # FAMI - FAMI
+        373: 1162 # Erasmus+ -> Erasmus+
         375: 1154 # PNRR
         414: 1161 # PN 21-27
+        451: 1151 # Altro -> Altro
 
   # field_abstract: -> shared_configuration
   # field_argomenti: -> shared_configuration
@@ -193,7 +194,6 @@ process:
     plugin: default_value
     source: status
     default_value: 1
-  # created: -> shared_configuration
 
 destination:
   plugin: 'entity:node'

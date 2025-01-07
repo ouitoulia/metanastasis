@@ -4,36 +4,64 @@ SELECT
   , node.`uuid`
   , 'documento' AS 'type'
   , TRIM(node.title) AS 'title'
-  , body.body_value AS 'field_abstract' -- pulire dai tag durante la migrazione
+  , TRIM(body.body_value) AS 'field_abstract' -- pulire dai tag durante la migrazione
   , GROUP_CONCAT(DISTINCT area.field_area_tid ORDER BY area.field_area_tid SEPARATOR ';') AS 'field_argomenti'
-  , body.body_value AS 'body_value' -- pulire dai tag durante la migrazione
+  , TRIM(body.body_value) AS 'body_value' -- pulire dai tag durante la migrazione
   , NULL AS 'field_tipologia_documento'
   , NULL AS 'field_copertina'
   , NULL AS 'field_galleria_immagini'
   , NULL AS 'field_persone'
-  -- DA ATTENZIONARE BENE ------------------------------------------------------------------------------------------------------------------------------
-  , GROUP_CONCAT(DISTINCT allegati.field_allegati_fid ORDER BY allegati.delta SEPARATOR ';') AS 'field_allegati_tid' -- gli allegati vanno importati mantenendo gli id
-  , GROUP_CONCAT(DISTINCT file.uri ORDER BY file.uid SEPARATOR ';') AS 'field_allegati_uri' -- copia da "/albopretorio/..." a "/circolare/allegati/..."
-  , 'Descrizione' AS  'field_allegati_desc' -- fai migrazione ad oc per recuperare la description sul campo field_data_field_allegati
-  -- FINE DA ATTENZIONARE BENE -------------------------------------------------------------------------------------------------------------------------
+  , JSON_ARRAYAGG(
+      DISTINCT JSON_OBJECT(
+        'migration_target_id', CONCAT('file_',allegati.field_allegati_fid),
+        'description', IFNULL(
+                          NULLIF(TRIM(allegati.field_allegati_description), ''),
+                          REPLACE(REPLACE(file.filename, '_', ' '), '.pdf', '')
+                       ),
+        'langcode', CASE
+                      WHEN allegati.language IS NULL OR allegati.language = 'und' THEN 'it'
+                      ELSE allegati.language
+                    END
+      )
+      ORDER BY allegati.delta
+    ) AS 'field_allegati'
   , NULL AS 'field_link'
-  , protocollo.field_protocollo_value AS 'field_protocollo'
+  , CASE
+      WHEN TRIM(protocollo.field_protocollo_value) = 'Ancora non definito' THEN NULL
+      ELSE TRIM(protocollo.field_protocollo_value)
+    END AS 'field_protocollo'
   , NULL AS 'field_data_inizio'
-  , cig.field_cig_value AS 'field_cig'
+  , REPLACE(REPLACE(REPLACE(TRIM(cig.field_cig_value), ' ', ''), ':', ''), '-', '') AS 'field_cig'
   , data.field_data_scadenza_value AS 'field_data_fine'
-  , cup.field_cup_value AS 'field_cup'
+  , TRIM(cup.field_cup_value) AS 'field_cup'
   , NULL AS 'field_codice_identificativo'
-  , NULL AS 'field_data_oblio'
+  , DATE_FORMAT(DATE_ADD(FROM_UNIXTIME(node.created), INTERVAL 10 YEAR), '%Y-%m-%dT%H:%i:%s') AS 'field_data_oblio'
+  , CASE
+      WHEN FROM_UNIXTIME(node.created, '%m%d') >= '0901'
+        THEN CONCAT(
+          FROM_UNIXTIME(node.created, '%Y'),
+          '_',
+          FROM_UNIXTIME(node.created, '%Y') + 1
+        )
+      ELSE CONCAT(
+        FROM_UNIXTIME(node.created, '%Y') - 1,
+        '_',
+        FROM_UNIXTIME(node.created, '%Y')
+      )
+    END AS 'field_anno_scolastico' -- viene ricavato dal created
   , NULL AS 'field_servizio'
   , NULL AS 'field_eventi'
   , NULL AS 'field_progetti'
   , NULL AS 'field_percorso_di_studio'
-  , NULL AS 'field_notizie' -- se notizia ha un vecchio tid di field_area
+  , NULL AS 'field_notizie'
   , NULL AS 'field_classi'
-  , NULL AS 'field_finanziamenti' -- se field_area è "IN (term.tid)" vedi node_finanziamento.sql
+  , GROUP_CONCAT(DISTINCT CONCAT('finanziamento_',finanziamento.field_area_tid) ORDER BY finanziamento.delta SEPARATOR ';') AS 'field_finanziamenti'
   , NULL AS 'field_frequenza'
   , NULL AS 'field_struttura_responsabile'
-  , GROUP_CONCAT(DISTINCT at.field_categoria_albo_tid ORDER BY at.field_categoria_albo_tid SEPARATOR ';') AS 'amministrazione_trasparente'
+  , 904 AS 'field_tipologia_licenza'
+  , NULL AS 'field_timeline'
+  , NULL AS 'field_extra_info'
+  , GROUP_CONCAT(DISTINCT at.field_categoria_albo_tid ORDER BY at.field_categoria_albo_tid SEPARATOR ';') AS 'field_obbligo_di_pubblicazione'
   , 'it' AS 'langcode'
   , node.promote AS 'promote'
   , node.sticky AS 'sticky'
@@ -51,6 +79,20 @@ FROM node
   LEFT JOIN field_data_field_cup cup ON node.nid = cup.entity_id AND cup.bundle IN ('albo_pretorio', 'documenti')
   LEFT JOIN field_data_field_data_scadenza data ON node.nid = data.entity_id AND data.bundle IN ('albo_pretorio', 'documenti')
   LEFT JOIN field_data_field_categoria_albo at ON node.nid = at.entity_id AND at.bundle IN ('albo_pretorio', 'documenti')
+  -- Recupero l'eventuale finanziamento correlato
+  LEFT JOIN field_data_field_area finanziamento ON
+    node.nid = finanziamento.entity_id AND
+    finanziamento.bundle IN ('albo_pretorio', 'documenti') AND
+    finanziamento.field_area_tid IN (
+       357, 358, 359, -- nel body c'è un'immagine da migrare da private://
+       360, 361, 362, 364, 365, 366,
+       374, 376, 377, 378, 379,
+       406, 408, 409, 410, 415, 418,
+       420, 421, 422, 423, 424, 425, 426, 427, 428, 429,
+       430, 431, 432, 433, 434, 435, 436, 437, 438, 439,
+       440, 441, 442, 443, 444, 445, 446, 447, 448,
+       450
+    )
 WHERE
   ( node.type = 'albo_pretorio' OR node.type = 'documenti')
   AND node.title NOT LIKE '%circolare%'

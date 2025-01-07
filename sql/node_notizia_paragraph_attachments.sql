@@ -1,7 +1,7 @@
 SELECT
   CONCAT('article_',allegati.entity_id,'--attachments_',allegati.entity_id) AS 'migration_id'
   , JSON_ARRAYAGG(
-      JSON_OBJECT(
+      DISTINCT JSON_OBJECT(
         'migration_target_id', CONCAT('file_',allegati.field_allegati_fid),
         'description', IFNULL(
                           NULLIF(TRIM(allegati.field_allegati_description), ''),
