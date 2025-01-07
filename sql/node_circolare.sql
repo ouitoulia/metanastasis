@@ -30,7 +30,7 @@ SELECT
   , GROUP_CONCAT(DISTINCT area.field_area_tid ORDER BY area.field_area_tid SEPARATOR ';') AS 'field_destinatari'
   , NULL AS 'field_data_oblio'
   , JSON_ARRAYAGG(
-      JSON_OBJECT(
+      DISTINCT JSON_OBJECT(
         'migration_target_id', CONCAT('file_',allegati.field_allegati_fid),
         'description', IFNULL(
                         NULLIF(TRIM(allegati.field_allegati_description), ''),

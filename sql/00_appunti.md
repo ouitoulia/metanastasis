@@ -19,6 +19,7 @@
 
 `drush migrate:import --update --tag marvasivizzone --execute-dependencies`
 
+https://icmarvasivizzone.edu.it/it/docenti/~preside/verbale-n4-collegio-dei-docenti-del-11122014
 https://icmarvasivizzone.edu.it/it/notizie/saluti-del-dirigente-scolastico-nicolantonio-cutuli
 
 # Spostare i file
@@ -92,3 +93,30 @@ media/immagini
         'edit own forum topics': 'edit own forum content'
     - plugin: flatten
 ```
+---------------------------------------------------------------
+3. Usare BFG Repo-Cleaner (alternativa)
+
+Se preferisci un approccio più semplice, usa BFG Repo-Cleaner.
+Installazione
+
+Scarica il JAR di BFG da BFG Repo-Cleaner.
+Eliminazione della cartella /artifact
+
+Esegui il comando seguente:
+
+java -jar bfg.jar --delete-folders artifact path/to/repository.git
+
+Questo rimuove tutti i file presenti nella cartella /artifact in ogni commit.
+Rimuovere specifici tipi di file (opzionale)
+
+Se desideri eliminare tutti i file JSON dal repository:
+
+java -jar bfg.jar --delete-files '*.json' path/to/repository.git
+
+4. Ripulire e comprimere la cronologia
+
+Dopo aver usato git filter-repo o BFG, esegui questi comandi per eliminare i riferimenti a oggetti rimossi dalla cronologia:
+
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+
