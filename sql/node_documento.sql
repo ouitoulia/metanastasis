@@ -7,7 +7,30 @@ SELECT
   , TRIM(body.body_value) AS 'field_abstract' -- pulire dai tag durante la migrazione
   , GROUP_CONCAT(DISTINCT area.field_area_tid ORDER BY area.field_area_tid SEPARATOR ';') AS 'field_argomenti'
   , TRIM(body.body_value) AS 'body_value' -- pulire dai tag durante la migrazione
-  , NULL AS 'field_tipologia_documento'
+  -- , NULL AS 'field_tipologia_documento'
+  , CASE
+      -- Bandi e gare
+      WHEN node.title LIKE '%determina a contrarre%' OR at.field_categoria_albo_tid IN (24,315,316,317,318,319,320,321,322,323,324,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350) THEN 1802
+      -- Bilancio
+      WHEN at.field_categoria_albo_tid IN (101) THEN 1805
+      -- Contratti - Personale ATA
+      WHEN at.field_categoria_albo_tid IN (95) THEN 1805
+      -- Contratti - Personale Docente
+      WHEN at.field_categoria_albo_tid IN (96) THEN 1806
+      -- Contratti e convenzioni
+      WHEN node.title LIKE 'Incarico individuale per assistenza specialistica%' THEN 1807
+      -- Convocazioni
+      WHEN node.title LIKE 'convocazion%' OR at.field_categoria_albo_tid IN (98) THEN 1808
+      -- Delibere Consiglio di Istituto
+      WHEN node.title LIKE 'Verbale%Istituto%' THEN 1810
+      -- Delibere Collegio dei Docenti
+      WHEN node.title LIKE 'Verbale%Docenti%' THEN 1811
+      -- Graduatorie
+      WHEN node.title LIKE '%graduatori%' OR at.field_categoria_albo_tid IN (26) THEN 1816
+      -- Regolamento
+      WHEN node.title LIKE '%regolament%' OR at.field_categoria_albo_tid IN (310) THEN 1822
+      ELSE NULL
+    END AS 'field_tipologia_documento'
   , NULL AS 'field_copertina'
   , NULL AS 'field_galleria_immagini'
   , NULL AS 'field_persone'
@@ -67,7 +90,7 @@ SELECT
   , node.sticky AS 'sticky'
   , node.status AS 'status'
   , node.created AS 'created'
-  , node.changed AS 'changed'
+  , node.created AS 'changed'
 FROM node
   LEFT JOIN field_data_body body ON node.nid = body.entity_id AND body.bundle IN ('albo_pretorio', 'documenti')
   LEFT JOIN field_data_field_area area ON node.nid = area.entity_id AND area.bundle IN ('albo_pretorio', 'documenti') AND area.field_area_tid IN (30,27,29,28) -- recupera i destinatari
@@ -93,13 +116,15 @@ FROM node
        440, 441, 442, 443, 444, 445, 446, 447, 448,
        450
     )
+  -- Recupero il campo field_circolare
+  LEFT JOIN field_data_field_circolare circolare ON node.nid = circolare.entity_id AND circolare.bundle IN ('albo_pretorio', 'documenti')
 WHERE
-  ( node.type = 'albo_pretorio' OR node.type = 'documenti')
-  AND node.title NOT LIKE '%circolare%'
+  node.`type` IN ('albo_pretorio', 'documenti')
+  AND (circolare.field_circolare_value = 0 OR circolare.field_circolare_value IS NULL) -- FALSE o NULL se non è una circolare
 GROUP BY
   node.nid, node.uid, node.uuid, node.title, body.body_value,
   protocollo.field_protocollo_value, cig.field_cig_value, cup.field_cup_value,
   data.field_data_scadenza_value,
   node.promote, node.sticky, node.status, node.created, node.changed
-ORDER BY node.nid ASC
+ORDER BY node.created ASC
 ;

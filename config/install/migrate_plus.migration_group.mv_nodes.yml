@@ -56,6 +56,7 @@ shared_configuration:
       - plugin: static_map
         bypass: false
         map:
+          23: 1403 # "Avvisi Pubblici" -> "Albo"
           24: null # Bandi di gara e contratti -> è una categoria AT viene migrata in altro vocabolario
           26: null # Graduatorie -> è una categoria AT viene migrata in altro vocabolario
           27: 1453 # "Docenti" -> "Docenti"
@@ -131,8 +132,11 @@ shared_configuration:
           123: 1475 # "Organizzazione "-> "Organigramma"
           124: null # Organi di indirizzo politico e di amministrazione e gestione, con l'indicazione delle rispettive competenze -> è una categoria AT viene migrata in altro vocabolario
           138: null # Personale -> è una categoria AT viene migrata in altro vocabolario
+          145: null # "Incarichi conferiti e autorizzati ai dipendenti" -> è una categoria AT viene migrata in altro vocabolario
           147: 1415 # "Contrattazione collettiva" -> "Bacheca Sindacale"
           175: 1503 # "Sovvenzioni, contributi, sussidi, vantaggi economici" -> "Servizi"
+          186: 1503 # "Servizi erogati" -> "Servizi"
+          187: 1503 # "Carta dei servizi e standard di qualità" -> "Servizi"
           199: null # Altri contenuti -> è una categoria AT viene migrata in altro vocabolario
           202: null # dm 8/11
           209: 1498 # "scuola dell'infanzia" -> "Scuola dell'infanzia"
@@ -247,6 +251,9 @@ shared_configuration:
           397: 1404 # "Contratti integrativi" -> "Albo sindacale"
           417: 1438 # "erasmus" -> "Erasmus"
           418: 1472 # "M4C1I3.1-2023-1143-P-36314 - Mattone su mattone DM 65/2023" -> "Offerta formativa"
+          446: 1438 # "Smart Using of Waste - SUW - 2021-2-IT02-KA210-SCH-000048390" -> "Erasmus"
+          447: 1438 # "Kids need fun at school - 2021-2-IT02-KA210-SCH-000050286" -> "Erasmus"
+          448: 1438 # "STEAM Team for NATURE - 2021-2-RO01-KA210-SCH-000048074" -> "Erasmus"
           1423: 1423 # "Circolari" -> "Circolari"
 
     field_persone:

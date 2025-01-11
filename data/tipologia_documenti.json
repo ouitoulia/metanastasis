@@ -1,0 +1,5 @@
+{
+  "data": [
+    {"entity": "taxonomy_term", "type": "tipologia_documenti", "id": 1825, "attributes": {"name": "Decreti", "icon": "it-file"}}
+  ]
+}
