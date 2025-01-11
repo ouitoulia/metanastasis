@@ -7,8 +7,12 @@
 function metanastasis_uninstall() {
   // Delete migration configurations.
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_file')->delete();
-  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_media')->delete();
-  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_menu_link')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_media_image')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_media_video')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_menu')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_circolare')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_documento')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_finanziamento')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_luogo')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_notizia')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_node_notizia_paragraph_attachments')->delete();
@@ -19,7 +23,7 @@ function metanastasis_uninstall() {
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_taxonomy_argomenti')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration.mv_user')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_files')->delete();
-  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_menu')->delete();
+  \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_menus')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_nodes')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_paragraphs')->delete();
   \Drupal::configFactory()->getEditable('migrate_plus.migration_group.mv_taxonomies')->delete();

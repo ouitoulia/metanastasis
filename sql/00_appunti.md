@@ -1,21 +1,8 @@
-# Gestione file
+# FIX
+- prima pagina: alcuni documenti non vengono visualizzati con data oblio null a causa bug
 
-  `field_allegati`	File (modulo: File)
-    Articolo                article => articolo/allegati
-    Albo Pretorio           albo-pretorio => albopretorio
-    Albo Pretorio TAXONOMY  albo_pretorio => amministrazione-trasparente
-    Articolo Blog Docente   blog => blog/allegati
-    Documenti               documenti => documenti
-    Materiali Didattici     materiali-didattici => materiali-didattici/allegati
-    Modello                 webform => modelli
-    Pagina Base             page => pagina/allegati
-    Corsi di Formazione (T) corsi_di_formazione => corsi-di-formazione/allegati
-
-  `field_galleria`	Immagine (modulo: Image)
-    Articolo                article => articolo/gallery
-    Articolo Blog Docente   blog => blog/galleria
-    Materiali Didattici     materiali_didattici => materiali-didattici/immagini
-    Pagina Base             page => pagina/galleria
+# Cose manuali durante migrazione
+Se cambi dominio cambia url in migrazioni tassonomie e menu
 
 `drush migrate:import --update --tag marvasivizzone --execute-dependencies`
 
@@ -41,6 +28,25 @@ OR uri LIKE 'public://articolo/allegati%';
 # Da recuperare data corretta in file_managed
 Persona/ritratto
 media/immagini
+
+# Gestione file
+
+  `field_allegati`	File (modulo: File)
+    Articolo                article => articolo/allegati
+    Albo Pretorio           albo-pretorio => albopretorio
+    Albo Pretorio TAXONOMY  albo_pretorio => amministrazione-trasparente
+    Articolo Blog Docente   blog => blog/allegati
+    Documenti               documenti => documenti
+    Materiali Didattici     materiali-didattici => materiali-didattici/allegati
+    Modello                 webform => modelli
+    Pagina Base             page => pagina/allegati
+    Corsi di Formazione (T) corsi_di_formazione => corsi-di-formazione/allegati
+
+  `field_galleria`	Immagine (modulo: Image)
+    Articolo                article => articolo/gallery
+    Articolo Blog Docente   blog => blog/galleria
+    Materiali Didattici     materiali_didattici => materiali-didattici/immagini
+    Pagina Base             page => pagina/galleria
 
 ./
 ├── 00file_caricati
@@ -72,29 +78,35 @@ media/immagini
 │ ├── galleria -> `field_galleria` ==> no immagini di galleria
 │ └── immagine -> `field_image` ==> media
 
-```yaml
-  permissions:
-    -
-      plugin: static_map
-      source: permissions
-      bypass: true
-      map:
-        'use PHP for block visibility': 'use PHP for settings'
-        'administer site-wide contact form': 'administer contact forms'
-        'post comments without approval': 'skip comment approval'
-        'edit own blog entries': 'edit own blog content'
-        'edit any blog entry': 'edit any blog content'
-        'delete own blog entries': 'delete own blog content'
-        'delete any blog entry': 'delete any blog content'
-        'create forum topics': 'create forum content'
-        'delete any forum topic': 'delete any forum content'
-        'delete own forum topics': 'delete own forum content'
-        'edit any forum topic': 'edit any forum content'
-        'edit own forum topics': 'edit own forum content'
-    - plugin: flatten
-```
+
+# AT
+https://icmarvasivizzone.edu.it/it/albo-pretorio/tassi-di-assenza
+Pubblicare un documento con i link
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/piano-triennale-la-prevenzione-della-corruzione-e-della-trasparenza
+Pubblicare dei documenti con i piani passati associati a /taxonomy/term/9561
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/bilancio-preventivo-e-consuntivo
+Differenziare tra preventivo e consuntivo in quanto non lo sono
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/titolari-di-incarichi-di-amministrazione-di-direzione-o-di-governo
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/accessibilit%C3%A0-e-catalogo-di-dati-metadati-e-banche-dati
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/informazioni-ambientali
+c'è un DVR pubblicato da importare a mano come storico
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/tipologie-di-procedimento
+copiare informazioni nella pagina
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/accessibilit%C3%A0-e-catalogo-di-dati-metadati-e-banche-dati
+Pubblicare dei documenti con le informazioni memorizzate nella pagina di tassonomia
+
+https://icmarvasivizzone.edu.it/it/albo-pretorio/iban-e-pagamenti-informatici
+Pubblicare dei documenti con le informazioni memorizzate nella pagina di tassonomia
+
 ---------------------------------------------------------------
-3. Usare BFG Repo-Cleaner (alternativa)
+# Usare BFG Repo-Cleaner (alternativa)
 
 Se preferisci un approccio più semplice, usa BFG Repo-Cleaner.
 Installazione

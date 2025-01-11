@@ -329,116 +329,115 @@ process:
       source: field_obbligo_di_pubblicazione
       method: process
     - plugin: explode
-      source: field_destinatari
+      source: field_obbligo_di_pubblicazione
       delimiter: ";"
     - plugin: callback
       callable: intval
     - plugin: static_map
-      source: field_obbligo_di_pubblicazione
       bypass: false
       map:
-        23: placeholder # Avvisi Pubblici
+        23: null # Avvisi Pubblici
         24: 9580 # "Bandi di gara e contratti" -> "Documenti di gara"
         25: 9403 # "Decreti" -> "Atti amministrativi generali"
         26: 9403 # "Graduatorie" -> "Atti amministrativi generali"
         37: 9403 # "Atti generali" -> "Atti amministrativi generali"
-        95: placeholder # Contratti Personale ATA
-        96: placeholder # Contratti Personale Docente
-        97: placeholder # Incarichi affidati, a qualsiasi titolo, da una amministrazione a soggetti esterni
-        98: null # Convocazioni -> Da collegare categoria tipo documento
-        99: placeholder # Esiti esami
+        95: null # Contratti Personale ATA -> Da collegare categoria tipo documento <---------------------------------------------------
+        96: null # Contratti Personale Docente -> Da collegare categoria tipo documento <---------------------------------------------------
+        97: null # Incarichi affidati, a qualsiasi titolo, da una amministrazione a soggetti esterni
+        98: null # Convocazioni -> Da collegare categoria tipo documento <---------------------------------------------------
+        99: null # Esiti esami -> Da collegare categoria tipo documento <----------------------------------------------------
         100: null # "Organi collegiali" -> Da collegare categoria tipo documento
-        101: placeholder # Bilancio preventivo e consuntivo
-        117: placeholder # Piano Triennale per la prevenzione della corruzione e della trasparenza
+        101: 9524 # "Bilancio preventivo e consuntivo" -------- Da sistemare Manualmente ------> "Bilancio consuntivo - Documenti e allegati"
+        117: null # Piano Triennale per la prevenzione della corruzione e della trasparenza
         118: 9403 # "Disposizioni generali" -> "Atti amministrativi generali"
-        119: placeholder # Attestazione dell'OIV o di altra struttura analoga nell'assolvimento degli obblighi di pubblicazione
-        120: placeholder # Oneri informativi per cittadini e imprese
-        121: placeholder # Scadenzario obblighi amministrativi
-        122: placeholder # Storico - Scadenzario dei nuovi obblighi amministrativi
-        123: placeholder # Organizzazione
+        119: 9529 # "Attestazione dell'OIV o di altra struttura analoga nell'assolvimento degli obblighi di pubblicazione" -> "Atti degli Organismi indipendenti di valutazione, nuclei di valutazione o altri organismi con funzioni analoghe"
+        120: null # Oneri informativi per cittadini e imprese
+        121: null # Scadenzario obblighi amministrativi
+        122: null # Storico - Scadenzario dei nuovi obblighi amministrativi
+        123: null # Organizzazione
         124: null # "Organi di indirizzo politico e di amministrazione e gestione, con l'indicazione delle rispettive competenze" -> Non di pertinenza scolastica
-        125: placeholder # Sanzioni per mancata comunicazione dei dati
-        126: placeholder # Rendiconti gruppi consiliari regionali/provinciali
+        125: 9441 # "Sanzioni per mancata comunicazione dei dati" -> Sanzioni per mancata comunicazione dei dati
+        126: null # Rendiconti gruppi consiliari regionali/provinciali
         127: 9444 # Articolazione degli uffici
-        128: placeholder # Telefono e posta elettronica
-        136: placeholder # Contratti e convenzioni
-        137: placeholder # Incarichi conferiti da una amministrazione ai dipendenti di altra amministrazione
-        138: placeholder # Personale
-        139: placeholder # Titolari di incarichi dirigenziali amministrativi di vertice
-        140: placeholder # Dirigenti
-        141: placeholder # Nominativi e curricula Dirigenti e titolari posizioni organizzative
+        128: null # Telefono e posta elettronica
+        136: null # Contratti e convenzioni
+        137: null # Incarichi conferiti da una amministrazione ai dipendenti di altra amministrazione
+        138: null # Personale
+        139: null # Titolari di incarichi dirigenziali amministrativi di vertice
+        140: null # Dirigenti
+        141: null # Nominativi e curricula Dirigenti e titolari posizioni organizzative
         142: 9462 # "Dotazione organica" -> "Incarichi conferiti e autorizzati ai dipendenti (dirigenti e non dirigenti)"
-        143: placeholder # Personale non a tempo indeterminato
-        144: placeholder # Tassi di assenza
+        143: null # Personale non a tempo indeterminato
+        144: null # Tassi di assenza -> Spostare i link https://icmarvasivizzone.edu.it/it/albo-pretorio/tassi-di-assenza <--------------------
         145: 9462 # "Incarichi conferiti e autorizzati ai dipendenti" -> "Incarichi conferiti e autorizzati ai dipendenti"
         146: 9463 # "Contrattazione collettiva" -> "Contrattazione collettiva"
         147: 9464 # "Contrattazione integrativa" -> "Contrattazione integrativa"
-        148: placeholder # OIV
+        148: null # OIV
         149: 9467 # "Bandi di concorso" -> "Bandi di concorso"
-        150: placeholder # Performance
-        151: placeholder # Piano della Performance
-        152: placeholder # Relazione sulla Performance
+        150: null # Performance
+        151: null # Piano della Performance
+        152: null # Relazione sulla Performance
         153: 9471 # "Ammontare complessivo dei premi" -> "Ammontare complessivo dei premi"
         154: 9472 # "Dati relativi ai premi" -> "Dati relativi ai premi"
-        155: placeholder # Benessere organizzativo
-        156: placeholder # Enti controllati
-        157: placeholder # Enti pubblici vigilati
-        158: placeholder # Società partecipate
-        159: placeholder # Enti di diritto privato controllati
-        160: placeholder # Rappresentazione grafica
-        161: placeholder # Attività e procedimenti
-        162: placeholder # Dati aggregati attività amministrativa
-        163: placeholder # Tipologie di procedimento
-        164: placeholder # Monitoraggio tempi procedimentali
-        165: placeholder # Dichiarazioni sostitutive e acquisizione d'ufficio dei dati
-        166: placeholder # Provvedimenti
-        167: 9403 # "Provvedimenti organi indirizzo-politico" -> "Atti amministrativi generali"
-        168: 9403 # "Provvedimenti dirigenti - Amministrativi" -> "Atti amministrativi generali"
-        169: placeholder # Aggiudicazioni / Scelta contraente
+        155: null # Benessere organizzativo
+        156: null # Enti controllati
+        157: null # Enti pubblici vigilati
+        158: null # Società partecipate
+        159: null # Enti di diritto privato controllati
+        160: null # Rappresentazione grafica
+        161: null # Attività e procedimenti
+        162: null # Dati aggregati attività amministrativa
+        163: null # Tipologie di procedimento
+        164: null # Monitoraggio tempi procedimentali
+        165: null # Dichiarazioni sostitutive e acquisizione d'ufficio dei dati
+        166: null # Provvedimenti
+        167: null # Provvedimenti organi indirizzo-politico
+        168: null # Provvedimenti dirigenti - Amministrativi
+        169: null # Aggiudicazioni / Scelta contraente
         170: 9580 # "Determine attività negoziale" -> "Documenti di gara"
-        171: placeholder # Incarichi a dipendenti pubblici
-        172: placeholder # Incarichi a soggetti privati
-        173: placeholder # Incarichi conferiti e autorizzati ai dipendenti
-        174: placeholder # Controlli sulle Imprese
-        175: placeholder # Sovvenzioni, contributi, sussidi, vantaggi economici
-        176: placeholder # Criteri e modalità
-        177: placeholder # Atti di concessione
-        178: placeholder # Elenco fornitori
-        179: placeholder # Incarichi a soggetti privati
-        180: placeholder # Bilanci
-        181: placeholder # Piano degli indicatori e risultati attesi di bilancio
-        182: placeholder # Beni immobili e gestione patrimonio
-        183: placeholder # Canoni di locazione o affitto
-        184: placeholder # Patrimonio immobiliare
-        185: placeholder # Controlli e rilievi sull'amministrazione
-        186: placeholder # Servizi erogati
-        187: placeholder # Carta dei servizi e standard di qualità
-        188: placeholder # Costi contabilizzati
-        189: placeholder # Tempi medi di erogazione dei servizi
-        190: placeholder # Liste di attesa
-        191: placeholder # Pagamenti dell'amministrazione
+        171: null # Incarichi a dipendenti pubblici
+        172: null # Incarichi a soggetti privati
+        173: null # Incarichi conferiti e autorizzati ai dipendenti
+        174: null # Controlli sulle Imprese
+        175: null # Sovvenzioni, contributi, sussidi, vantaggi economici
+        176: 9520 # Criteri e modalità
+        177: 9521 # Atti di concessione
+        178: null # Elenco fornitori
+        179: null # Incarichi a soggetti privati
+        180: null # Bilanci
+        181: 9526 # "Piano degli indicatori e risultati attesi di bilancio" -> Piano degli indicatori e risultati attesi di bilancio
+        182: null # Beni immobili e gestione patrimonio
+        183: 9528 # "Canoni di locazione o affitto "-> "Canoni di locazione o affitto"
+        184: 9527 # "Patrimonio immobiliare" -> "Patrimonio immobiliare"
+        185: null # Controlli e rilievi sull'amministrazione
+        186: null # Servizi erogati
+        187: 9532 # "Carta dei servizi e standard di qualità" -> "Carta dei servizi e standard di qualità"
+        188: null # Costi contabilizzati
+        189: null # Tempi medi di erogazione dei servizi
+        190: null # Liste di attesa
+        191: null # Pagamenti dell'amministrazione
         192: 9539 # "Indicatore di tempestività dei pagamenti" -> "Indicatore di tempestività dei pagamenti"
-        193: placeholder # IBAN e pagamenti informatici
-        194: placeholder # Opere pubbliche
-        195: placeholder # Pianificazione e governo del territorio
-        196: placeholder # Informazioni ambientali
-        197: placeholder # Interventi straordinari e di emergenza
-        198: placeholder # Strutture sanitarie private accreditate
+        193: null # IBAN e pagamenti informatici
+        194: null # Opere pubbliche
+        195: null # Pianificazione e governo del territorio
+        196: null # Informazioni ambientali
+        197: null # Interventi straordinari e di emergenza
+        198: null # Strutture sanitarie private accreditate
         199: null # Altri contenuti -> è una categoria non un obbligo
         200: 9405 # "Codice Disciplinare e di condotta" -> "Codice disciplinare e codice di condotta"
         201: 9448 # "Consulenti e collaboratori" -> "Consulenti e collaboratori"
-        297: placeholder # Accessibilità e Catalogo di dati, metadati e banche dati
+        297: null # Accessibilità e Catalogo di dati, metadati e banche dati
         310: 9569 # "Regolamenti" -> "Regolamenti"
         314: null # Bacheca Sindacale -> Da collegare categoria tipo documento
         315: 9580 # "Atti delle amministrazioni aggiudicatrici e degli enti aggiudicatori distintamente per ogni procedura" -> "Documenti di gara"
-        316: placeholder # Informazioni sulle singole procedure in formato tabellare
+        316: 9580 # Informazioni sulle singole procedure in formato tabellare -> "Documenti di gara"
         317: 9580 # "Avvisi" -> "Documenti di gara"
         318: 9580 # Bandi di gara -> "Documenti di gara"
         319: 9580 # "Aggiudicazioni" -> Documenti di gara
         320: 9580 # Contratti -> Documenti di gara
         321: 9580 # "Determine Attività negoziale distinte per categoria merceologica" -> "Documenti di gara"
-        322: placeholder # Registro fatture
-        323: placeholder # Albo fornitori
+        322: 9580 # Registro fatture -> Documenti di gara
+        323: 9580 # Albo fornitori -> Documenti di gara
         324: 9580 # Privacy e sicurezza dei dati -> "Documenti di gara"
         329: 9580 # Accessori per attività sportive e ricreative -> "Documenti di gara"
         330: 9580 # Arredi e attrezzature per ufficio -> "Documenti di gara"
@@ -462,32 +461,32 @@ process:
         348: 9580 # Spese per la gestione documentale, archiviazione e conservazione -> "Documenti di gara"
         349: 9580 # Spese per servizi on-line -> "Documenti di gara"
         350: 9580 # Sport -> "Documenti di gara"
-        380: placeholder # Organi di revisione amministrativa e contabile
-        381: placeholder # Relazioni degli organi di revisione amministrativa e contabile
-        382: placeholder # Oneri informativi per cittadini e imprese
-        383: placeholder # Burocrazia zero
-        384: placeholder # Burocrazia zero
-        385: placeholder # Attività soggette a controllo
+        380: 9448 # "Organi di revisione amministrativa e contabile" -> "Consulenti e collaboratori"
+        381: 9530 # "Relazioni degli organi di revisione amministrativa e contabile" -> "Relazioni degli organi di revisione amministrativa e contabile"
+        382: null # Oneri informativi per cittadini e imprese
+        383: null # Burocrazia zero
+        384: null # Burocrazia zero
+        385: null # Attività soggette a controllo
         386: 9421 # "Titolari di incarichi politici, di amministrazione, di direzione o di governo" -> "Titolari di incarichi di amministrazione, di direzione o di governo - Atto di nomina o di proclamazione"
-        387: placeholder # Titolari di incarichi politici
-        388: placeholder # Titolari di incarichi di amministrazione, di direzione o di governo
-        389: placeholder # Cessati dall'incarico
-        394: placeholder # Titolari di incarichi dirigenziali
-        395: placeholder # Dirigenti cessati
-        396: placeholder # Sanzioni per mancata comunicazione dei dati
+        387: null # Titolari di incarichi politici
+        388: null # Titolari di incarichi di amministrazione, di direzione o di governo
+        389: null # Cessati dall'incarico
+        394: null # Titolari di incarichi dirigenziali
+        395: null # Dirigenti cessati
+        396: null # Sanzioni per mancata comunicazione dei dati
         397: 9464 # "Contratti integrativi" -> "Contratti integrativi"
-        398: placeholder # Costi contratti integrativi
-        399: placeholder # Organismi indipendenti di valutazione, nuclei di valutazione o altri organismi con funzioni analoghe
-        400: placeholder # Corte dei conti
-        401: placeholder # Class action
-        402: placeholder # Servizi in rete
-        403: placeholder # Dati sui pagamenti
-        404: placeholder # Dati sui pagamenti del servizio sanitario nazionale
-        405: placeholder # Prevenzione della Corruzione
+        398: null # Costi contratti integrativi
+        399: null # Organismi indipendenti di valutazione, nuclei di valutazione o altri organismi con funzioni analoghe
+        400: 9531 # "Corte dei conti" -> "Rilievi Corte dei conti"
+        401: null # Class action
+        402: null # Servizi in rete
+        403: 9541 # "Dati sui pagamenti" -> "Ammontare complessivo dei debiti"
+        404: null # Dati sui pagamenti del servizio sanitario nazionale
+        405: 9561 # "Prevenzione della Corruzione" -> "Regolamenti per la prevenzione e la repressione della corruzione e dell'illegalità"
         411: 9448 # "Titolari di incarichi di collaborazione o consulenza" -> "Consulenti e collaboratori"
-        412: placeholder # Amministratori ed esperti ex art. 32 d.l. 90/2014
-        413: placeholder # Sistema di misurazione della performance
-
+        412: null # Amministratori ed esperti ex art. 32 d.l. 90/2014
+        413: null # Sistema di misurazione della performance
+        449: 9567 # "Registro degli accessi" -> "Registro degli accessi"
 
   # langcode: -> shared_configuration
   # promote: -> shared_configuration

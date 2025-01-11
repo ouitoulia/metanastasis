@@ -1,0 +1,13 @@
+{
+  "data": [
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1514, "attributes": {"name": "Spettacoli"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1515, "attributes": {"name": "Legalità"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1516, "attributes": {"name": "Collegio dei docenti"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1517, "attributes": {"name": "POR - Programma Operativo Regionale"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1518, "attributes": {"name": "Bacheca Opportunità"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1519, "attributes": {"name": "Coding"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1520, "attributes": {"name": "eTwinning"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1521, "attributes": {"name": "PNRR"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1522, "attributes": {"name": "Erasmusplus"}}
+  ]
+}

@@ -24,6 +24,7 @@ source:
     Content-Type: application/json
   urls:
     - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_persona.json'
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/data/ex-dirigenti.json'
   item_selector: 0
   fields:
     - name: nid
@@ -159,6 +160,7 @@ process:
         #16:
         #17: # "Coordinatore" viene gestito a mano
         #18: # "Responsabile plesso" viene gestito a mano
+        1731: 1731 # "Ex Dirigente Scolastico" -> "Ex Dirigente Scolastico"
 
   field_tipologia_posto: field_tipologia_posto
 

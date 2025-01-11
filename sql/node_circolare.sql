@@ -58,7 +58,7 @@ SELECT
   , node.sticky AS 'sticky'
   , node.status AS 'status'
   , node.created AS 'created'
-  , node.changed AS 'changed'
+  , node.created AS 'changed'
 FROM node
   LEFT JOIN field_data_body body ON node.nid = body.entity_id AND body.bundle IN ('albo_pretorio', 'documenti')
   LEFT JOIN field_data_field_area area ON node.nid = area.entity_id AND area.bundle IN ('albo_pretorio', 'documenti') AND area.field_area_tid IN (30,27,29,28) -- recupera i destinatari
@@ -74,13 +74,15 @@ FROM node
   LEFT JOIN field_data_field_cup cup ON node.nid = cup.entity_id AND cup.bundle IN ('albo_pretorio', 'documenti')
   LEFT JOIN field_data_field_data_scadenza data ON node.nid = data.entity_id AND data.bundle IN ('albo_pretorio', 'documenti')
   LEFT JOIN field_data_field_categoria_albo at ON node.nid = at.entity_id AND at.bundle IN ('albo_pretorio', 'documenti')
+  -- Recupero il campo field_circolare
+  LEFT JOIN field_data_field_circolare circolare ON node.nid = circolare.entity_id AND circolare.bundle IN ('albo_pretorio', 'documenti')
 WHERE
-  (node.type = 'albo_pretorio' OR node.type = 'documenti')
-  AND node.title LIKE '%circolare%'
+  node.`type` IN ('albo_pretorio', 'documenti')
+  AND circolare.field_circolare_value = 1 -- Se è una circolare
 GROUP BY
   node.nid, node.uid, node.uuid, node.title, body.body_value,
   protocollo.field_protocollo_value, cig.field_cig_value, cup.field_cup_value,
   data.field_data_scadenza_value,
   node.promote, node.sticky, node.status, node.created, node.changed
-ORDER BY node.nid ASC
+ORDER BY node.created ASC
 ;
