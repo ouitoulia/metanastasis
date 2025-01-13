@@ -1,6 +1,3 @@
-# FIX
-- prima pagina: alcuni documenti non vengono visualizzati con data oblio null a causa bug
-
 # Cose manuali durante migrazione
 Se cambi dominio cambia url in migrazioni tassonomie e menu
 
@@ -16,18 +13,11 @@ vedi campi `=> paragraph ==> da spostare a mano in attachments`
 cp /path/to/public/blog/allegati/* /path/to/public/attachments/
 cp /path/to/public/articolo/allegati/* /path/to/public/attachments/
 ```
+Aggiorna il db eseguendo [0_file_managed_update_uri_attachments.sql](0_file_managed_update_uri_attachments.sql)
 
-```sql
-UPDATE file_managed
-SET uri = REPLACE(uri, 'public://blog/allegati', 'public://attachments'),
-uri = REPLACE(uri, 'public://articolo/allegati', 'public://attachments')
-WHERE uri LIKE 'public://blog/allegati%'
-OR uri LIKE 'public://articolo/allegati%';
-```
+# Data dei file di copertina
+[0_fix_media_file.sql](0_fix_media_file.sql)
 
-# Da recuperare data corretta in file_managed
-Persona/ritratto
-media/immagini
 
 # Gestione file
 
@@ -67,11 +57,11 @@ media/immagini
 │ └── immgagine -> `field_image` ==> NON MIGRATO OBSOLETO
 ├── corsi-di-formazione
 │ └── allegati -> `field_allegati`
-├── documenti  -> `field_allegati`
+├── documenti -> `field_allegati` => paragraph ==> da spostare a mano in attachments
 ├── materiali-didattici
-│ ├── allegati  -> `field_allegati`
+│ ├── allegati -> `field_allegati` => paragraph ==> da spostare a mano in attachments
 │ ├── immagine -> `field_image` ==> media
-│ └── immagini -> `field_galleria`
+│ └── immagini -> `field_galleria` ==> paragraph
 ├── modelli -> `field_allegati`
 ├── pagina
 │ ├── allegati -> `field_allegati` > da valutare paragraph

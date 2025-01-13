@@ -15,6 +15,6 @@ SELECT
   , node.created AS 'created'
 FROM field_data_field_galleria galleria
   LEFT JOIN node node ON galleria.entity_id = node.nid
-WHERE galleria.bundle IN ('article', 'blog')
+WHERE galleria.bundle IN ('article', 'blog') OR node.nid IN (387,392,434,435,547,569,582,683,808,822,825,885,1207,1208,1530)
 ORDER BY galleria.entity_id
 ;
