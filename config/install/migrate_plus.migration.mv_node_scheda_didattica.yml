@@ -1,0 +1,107 @@
+langcode: it
+status: true
+dependencies:
+  enforced:
+    module:
+      - metanastasis
+id: mv_node_scheda_didattica
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - json
+  - marvasivizzone
+  - node
+  - node_scheda_didattica
+migration_group: mv_nodes
+label: 'Tipo di contenuto scheda didattica'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: application/json
+  urls:
+    - 'https://marvasi-migration.ddev.site/modules/custom/metanastasis/artifact/node_scheda_didattica.json'
+  item_selector: 0
+  fields:
+    - name: migration_id
+      label: 'ID del nodo'
+      selector: migration_id
+    - name: uuid
+      label: 'UUID del nodo per referenza migrazione'
+      selector: uuid
+    - name: uid
+      label: "L'UID del del proprietario del contenuto"
+      selector: uid
+    - name: type
+      label: 'Il tipo di contenuto'
+      selector: type
+    - name: title
+      label: 'Il titolo del contenuto'
+      selector: title
+
+    - name: field_abstract
+      label: 'Descrizione breve'
+      selector: field_abstract
+    - name: body_value
+      label: 'Corpo della notizia'
+      selector: body_value
+    - name: field_argomenti
+      label: 'Argomenti'
+      selector: field_argomenti
+
+    - name: langcode
+      label: 'La lingua del contenuto'
+      selector: langcode
+    - name: promote
+      label: 'Se il contenuto è promosso alla prima pagina'
+      selector: promote
+    - name: sticky
+      label: 'Se il contenuto è in cima agli elenchi'
+      selector: sticky
+    - name: status
+      label: 'Se il contenuto è pubblicato o meno'
+      selector: status
+    - name: created
+      label: 'La data di pubblicazione'
+      selector: created
+    - name: changed
+      label: 'La data di pubblicazione'
+      selector: changed
+  ids:
+    migration_id:
+      type: string
+    uuid:
+      type: string
+
+process:
+  #nid: migration_id
+  uid: uid
+  type: type
+  title: title
+
+  # field_abstract: -> shared_configuration
+  # field_argomenti: -> shared_configuration
+  # body/value: -> shared_configuration
+  # body/format: -> shared_configuration
+
+  # langcode: -> shared_configuration
+  # promote: -> shared_configuration
+  # sticky: -> shared_configuration
+  status:
+    plugin: default_value
+    source: status
+    default_value: 0
+  # created: -> shared_configuration
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: scheda_didattica
+  translations: true
+
+migration_dependencies:
+  required:
+    - mv_user
+    - mv_taxonomy_argomenti

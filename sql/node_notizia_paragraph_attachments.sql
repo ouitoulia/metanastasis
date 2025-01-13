@@ -24,6 +24,6 @@ SELECT
 FROM field_data_field_allegati allegati
   LEFT JOIN node node ON allegati.entity_id = node.nid
   LEFT JOIN file_managed file ON allegati.field_allegati_fid = file.fid
-WHERE allegati.bundle IN ('article','blog')
+WHERE allegati.bundle IN ('article','blog') OR node.nid IN (387,392,434,435,547,569,582,683,808,822,825,885,1207,1208,1530)
 GROUP BY allegati.entity_id, allegati.language, node.created
 ORDER BY allegati.entity_id ASC;

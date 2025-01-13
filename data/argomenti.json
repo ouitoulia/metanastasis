@@ -8,6 +8,10 @@
     {"entity": "taxonomy_term", "type": "argomenti", "id": 1519, "attributes": {"name": "Coding"}},
     {"entity": "taxonomy_term", "type": "argomenti", "id": 1520, "attributes": {"name": "eTwinning"}},
     {"entity": "taxonomy_term", "type": "argomenti", "id": 1521, "attributes": {"name": "PNRR"}},
-    {"entity": "taxonomy_term", "type": "argomenti", "id": 1522, "attributes": {"name": "Erasmusplus"}}
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1522, "attributes": {"name": "Erasmusplus"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1523, "attributes": {"name": "Arte e immagine"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1524, "attributes": {"name": "Tecnologia"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1525, "attributes": {"name": "Clarinetto"}},
+    {"entity": "taxonomy_term", "type": "argomenti", "id": 1526, "attributes": {"name": "Percussioni"}}
   ]
 }

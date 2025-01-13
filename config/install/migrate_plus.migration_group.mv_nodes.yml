@@ -56,6 +56,27 @@ shared_configuration:
       - plugin: static_map
         bypass: false
         map:
+          2: 1457 # "Italiano" -> "Italiano"
+          3: 1463 # "Inglese" -> "Lingua inglese"
+          4: 1462 # "Francese" -> "Lingua francese"
+          5: 1506 # "Storia" -> "Storia"
+          6: 1447 # "Geografia" -> "Geografia"
+          7: 1467 # "Matematica" -> "Matematica"
+          8: 1493 # "Religione" -> "Religione cattolica"
+          9: 1496 # "Scienze" -> "Scienze"
+          10: 1470 # "Musica" -> "Musica"
+          11: 1523 # "Arte e immagine" -> "Tecnologia"
+          12: 1497 # "Scienze motorie" -> "Scienze motorie"
+          13: 1524 # "Tecnologia" -> "Tecnologia"
+          14: 1457 # "Approfondimento" -> "Italiano"
+          15: 1525 # "Clarinetto" -> "Clarinetto"
+          16: 1480 # "Pianoforte" -> "Pianoforte"
+          17: 1526 # "Percussioni" -> "Percussioni"
+          18: 1513 # "Violino" -> "Violino"
+          90: null # "Sostegno" -> Non è una materia
+          203: 1452 # "Informatica" -> "Informatica"
+          204: 1430 # "Didattica" -> "Didattica"
+          354: 1515 # "Educazione civica" -> "Legalità"
           23: 1403 # "Avvisi Pubblici" -> "Albo"
           24: null # Bandi di gara e contratti -> è una categoria AT viene migrata in altro vocabolario
           26: null # Graduatorie -> è una categoria AT viene migrata in altro vocabolario
@@ -139,6 +160,10 @@ shared_configuration:
           187: 1503 # "Carta dei servizi e standard di qualità" -> "Servizi"
           199: null # Altri contenuti -> è una categoria AT viene migrata in altro vocabolario
           202: null # dm 8/11
+          205: 1498 # "Infanzia" -> "Scuola dell'infanzia"
+          206: 1499 # "Primaria" -> "Scuola primaria"
+          207: 1500 # "Secondaria di primo grado" "Scuola secondaria"
+          208: 1500 # "Secondaria di secondo grado" -> "Scuola secondaria"
           209: 1498 # "scuola dell'infanzia" -> "Scuola dell'infanzia"
           210: 1446 # "Genitori" -> "Genitori"
           211: 1410 # "presepi" -> "Attività extracurricolari"

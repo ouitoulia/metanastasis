@@ -12,6 +12,6 @@ SELECT
   , node.created AS 'created'
 FROM field_data_field_video video
        LEFT JOIN node node ON video.entity_id = node.nid
-WHERE video.bundle IN ('article','blog')
+WHERE video.bundle IN ('article','blog') OR node.nid IN (387,392,434,435,547,569,582,683,808,822,825,885,1207,1208,1530)
 GROUP BY video.entity_id, video.language, node.created
 ORDER BY video.entity_id ASC;

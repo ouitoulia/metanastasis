@@ -189,14 +189,14 @@ process:
       bypass: false
       map:
         # infanzia
-        02: 2184 # "Italiano" -> "I discorsi e le parole"
-        03: 2184 # "Inglese" -> "I discorsi e le parole"
-        04: 2184 # "Francese" -> "I discorsi e le parole"
-        05: 2185 # "Storia" -> "La conoscenza del mondo"
-        06: 2185 # "Geografia" -> "La conoscenza del mondo"
-        07: 2185 # "Matematica" -> "La conoscenza del mondo"
-        08: 2181 # "Religione" -> "Il sé e l’altro"
-        09: 2185 # "Scienze" -> "La conoscenza del mondo"
+        2: 2184 # "Italiano" -> "I discorsi e le parole"
+        3: 2184 # "Inglese" -> "I discorsi e le parole"
+        4: 2184 # "Francese" -> "I discorsi e le parole"
+        5: 2185 # "Storia" -> "La conoscenza del mondo"
+        6: 2185 # "Geografia" -> "La conoscenza del mondo"
+        7: 2185 # "Matematica" -> "La conoscenza del mondo"
+        8: 2181 # "Religione" -> "Il sé e l’altro"
+        9: 2185 # "Scienze" -> "La conoscenza del mondo"
         10: 2183 # "Musica" -> "Immagini, suoni, colori"
         11: 2183 # "Arte e immagine" -> "Immagini, suoni, colori"
         12: 2182 # "Scienze motorie" -> "Il corpo e il movimento"
