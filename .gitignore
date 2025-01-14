@@ -62,3 +62,4 @@
 /drupal
 
 /artifact/*.json
+/bin/.env
