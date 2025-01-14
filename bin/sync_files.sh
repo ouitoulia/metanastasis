@@ -1,6 +1,24 @@
 #!/bin/bash
+################################################################################
+#
+#  Questo è uno script che installa Ouitoulìa CMS
+#
+#  Author: Pietro Arturo Panetta
+#  Site: https://www.drupal.org/u/arturopanetta
+#  Copyright: @arturu 2023
+#  License: AGPL-3.0-only
+#
+################################################################################
 
-source .env
+# La cartella base dove si trova questo script
+if [[ -L "${BASH_SOURCE[0]}" ]]; then
+  symlink_path=$(readlink -f "${BASH_SOURCE[0]}")
+  folderBase=$(dirname "$symlink_path")
+else
+  folderBase="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+fi
+
+source "${folderBase}"/.env
 
 rsync -avz --progress \
     --exclude '00file_caricati' \
