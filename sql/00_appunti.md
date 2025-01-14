@@ -96,29 +96,10 @@ https://icmarvasivizzone.edu.it/it/albo-pretorio/iban-e-pagamenti-informatici
 Pubblicare dei documenti con le informazioni memorizzate nella pagina di tassonomia
 
 ---------------------------------------------------------------
-# Usare BFG Repo-Cleaner (alternativa)
-
-Se preferisci un approccio più semplice, usa BFG Repo-Cleaner.
-Installazione
-
-Scarica il JAR di BFG da BFG Repo-Cleaner.
-Eliminazione della cartella /artifact
-
-Esegui il comando seguente:
+# BFG Repo-Cleaner
 
 java -jar bfg.jar --delete-folders artifact path/to/repository.git
-
-Questo rimuove tutti i file presenti nella cartella /artifact in ogni commit.
-Rimuovere specifici tipi di file (opzionale)
-
-Se desideri eliminare tutti i file JSON dal repository:
-
 java -jar bfg.jar --delete-files '*.json' path/to/repository.git
-
-4. Ripulire e comprimere la cronologia
-
-Dopo aver usato git filter-repo o BFG, esegui questi comandi per eliminare i riferimenti a oggetti rimossi dalla cronologia:
-
 git reflog expire --expire=now --all
 git gc --prune=now --aggressive
 

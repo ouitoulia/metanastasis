@@ -1,7 +1,10 @@
 SELECT
   CONCAT('documento_',node.nid) AS 'migration_id'
-  , node.uid AS 'uid' -- id giusto
   , node.`uuid`
+  , CASE
+      WHEN node.nid IN (1346,1347,1356,1357) THEN 1
+      ELSE node.uid
+    END AS 'uid' -- id giusto
   , 'documento' AS 'type'
   , TRIM(node.title) AS 'title'
   , TRIM(body.body_value) AS 'field_abstract' -- pulire dai tag durante la migrazione
@@ -33,7 +36,10 @@ SELECT
     END AS 'field_tipologia_documento'
   , NULL AS 'field_copertina'
   , NULL AS 'field_galleria_immagini'
-  , NULL AS 'field_persone'
+  , CASE
+     WHEN node.nid IN (1346,1347,1356,1357) THEN '31'
+     ELSE NULL
+    END 'field_persone'
   , JSON_ARRAYAGG(
       DISTINCT JSON_OBJECT(
         'migration_target_id', CONCAT('file_',allegati.field_allegati_fid),
