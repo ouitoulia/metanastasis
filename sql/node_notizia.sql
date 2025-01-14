@@ -1,7 +1,10 @@
 SELECT
   CONCAT('article_',node.nid) AS 'migration_id'
   , node.`uuid`
-  , node.uid AS 'uid' -- id giusto
+  , CASE
+      WHEN node.nid = 1892 THEN 1
+      ELSE node.uid
+    END AS 'uid' -- id giusto
   , 'article' AS 'type'
   , TRIM(node.title) AS 'title'
   , CASE
@@ -14,7 +17,10 @@ SELECT
   , image.field_image_fid AS 'field_copertina_media_id' -- id media per collegare la copertina
   , body.body_value AS 'body_value' -- pulire dai tag durante la migrazione
   , GROUP_CONCAT(DISTINCT insegnante.field_insegnante_target_id ORDER BY insegnante.delta SEPARATOR ';') AS 'field_persone' -- id sono giusti
-  , NULL AS 'field_persona_responsabile'
+  , CASE
+      WHEN node.nid = 1892 THEN 31
+      ELSE NULL
+    END AS 'field_persona_responsabile'
   , CASE
       WHEN galleria.field_galleria_fid IS NOT NULL AND allegati.field_allegati_fid IS NOT NULL AND video.field_video_input IS NOT NULL
         THEN CONCAT(
