@@ -373,6 +373,10 @@ process:
     plugin: skip_on_empty
     source: created
     method: process
+  changed:
+    plugin: skip_on_empty
+    source: created
+    method: process
 
 destination:
   plugin: 'entity:node'
