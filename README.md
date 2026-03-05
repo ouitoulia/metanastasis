@@ -2,6 +2,8 @@
 
 Μετανάστασις è un modulo che migra i contenuti dal sito vecchio al nuovo.
 
+Questo modulo viene archiviato in quanto la migrazione dal vecchio drupal 7 è stata effettuata
+
 1. Esegui le query che si trovano nella cartella `sql` e salva il risultato
 in formato JSON dentro la cartella `artifact`.
 2. Esegui [bin/sync_files.sh](bin/sync_files.sh) per scaricare/sincronizzare i file
